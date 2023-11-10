@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="07a44e02-c8ed-45c9-ba75-ce144d630cd2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/Initial data/data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/Initial data/macedonia-latest.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/Initial data/xml_to_csv.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/7.4/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/workspace-id.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.gradle/workspace-id.txt.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build/classes/java/main/ConvertCyrilicToLatinFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build/classes/java/main/Filter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build/classes/java/main/Pipe.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build/classes/java/main/PipeAndFilterMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build/classes/java/main/RemoveIdColumnFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build/resources/main/data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/src/main/java/ConvertCyrilicToLatinFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/src/main/java/Filter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/src/main/java/Pipe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/src/main/java/PipeAndFilterMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/src/main/java/RemoveIdColumnFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Домашна 1/PipeAndFilter/src/main/resources/data.csv" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2XWrDeWxKOZNZuy8LwUU6Nfjx9F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/drist/Desktop/Github/DIANS-PROJECT/Domasna1/PipeAndFilter&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\drist\Desktop\Github\DIANS-PROJECT\Domasna1\PipeAndFilter\src\main\resources" />
+      <recent name="C:\Users\sfili\Desktop\PipeAndFilter\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.PipeAndFilterMain">
+    <configuration name="PipeAndFilterMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="PipeAndFilterMain" />
+      <module name="PipeAndFilter.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PipeAndFilter" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.PipeAndFilterMain" />
+      <item itemvalue="Gradle.PipeAndFilter" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PipeAndFilterMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="07a44e02-c8ed-45c9-ba75-ce144d630cd2" name="Changes" comment="" />
+      <created>1698755559560</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698755559560</updated>
+      <workItem from="1698755560638" duration="10574000" />
+      <workItem from="1699200663456" duration="101000" />
+      <workItem from="1699452926100" duration="7736000" />
+      <workItem from="1699611164203" duration="469000" />
+      <workItem from="1699611667279" duration="1501000" />
+      <workItem from="1699613186822" duration="73000" />
+      <workItem from="1699613299953" duration="8398000" />
+      <workItem from="1699622362987" duration="28000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/PipeAndFilterMain.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
