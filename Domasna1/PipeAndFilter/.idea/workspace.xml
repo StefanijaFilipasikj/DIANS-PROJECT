@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07a44e02-c8ed-45c9-ba75-ce144d630cd2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Initial data/update_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Initial data/update_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Initial data/updated_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../Initial data/updated_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/filteredData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/filteredData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ConvertCyrilicToLatinFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ConvertCyrilicToLatinFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FirstLetterUpperFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FirstLetterUpperFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PipeAndFilterMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PipeAndFilterMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RemoveIdColumnFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RemoveIdColumnFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/updated_data.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,24 +57,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/drist/Desktop/Github/DIANS-PROJECT/Domasna1/PipeAndFilter",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "advanced.settings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/drist/Desktop/Github/DIANS-PROJECT/Domasna1/PipeAndFilter&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sfili\Documents\GitHub\DIANS-PROJECT\Domasna1\PipeAndFilter\src\main\resources" />
@@ -141,6 +139,7 @@
       <workItem from="1699613299953" duration="8398000" />
       <workItem from="1699622362987" duration="28000" />
       <workItem from="1699705812502" duration="2017000" />
+      <workItem from="1699708086528" duration="314000" />
     </task>
     <servers />
   </component>

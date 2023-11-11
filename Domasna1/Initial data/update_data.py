@@ -74,4 +74,4 @@ data['Region'] = regions
 
 data.columns = ['Id', 'Lat', 'Lon', 'Historic', 'Name', 'Address', 'Region']
 
-data.to_csv('/content/drive/MyDrive/updated_data.csv')
+data.to_csv('/content/drive/MyDrive/updated_data.csv', index=False)
