@@ -21,18 +21,28 @@ public class ConvertCyrilicToLatinFilter implements Filter<String>{
 
     @Override
     public String execute(String input) {
-        //TODO implement logic
         String[] split = input.split(",");
-        String name = split[split.length-1];
-        String newName = "";
-        for(int i=0;i<name.length();i++){
-            if(mapping.containsKey(Character.toString(name.charAt(i)))){
-                newName += mapping.get(Character.toString(name.charAt(i)));
+
+        String name = split[split.length-3];
+        String address = split[split.length-2];
+        String place = split[split.length-1];
+
+        split[split.length-3] = convert(name);
+        split[split.length-2] = convert(address);
+        split[split.length-1] = convert(place);
+
+        return String.join(",", split);
+    }
+
+    public String convert(String word){
+        String result = "";
+        for(int i=0;i<word.length();i++){
+            if(mapping.containsKey(Character.toString(word.charAt(i)))){
+                result += mapping.get(Character.toString(word.charAt(i)));
             }else{
-                newName += Character.toString(name.charAt(i));
+                result += Character.toString(word.charAt(i));
             }
         }
-        split[split.length-1] = newName;
-        return String.join(",", split);
+        return result;
     }
 }

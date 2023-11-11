@@ -19,7 +19,7 @@ public class PipeAndFilterMain {
         pipe.addFilter(removeIdColumnFilter);
 
         ClassLoader loader = PipeAndFilterMain.class.getClassLoader();
-        File dataFile = new File(loader.getResource("data.csv").getFile());
+        File dataFile = new File(loader.getResource("updated_data.csv").getFile());
         Scanner scanner = new Scanner(dataFile, "UTF-8");
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("filteredData.csv"), 8192);
