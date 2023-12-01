@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
@@ -49,4 +50,27 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     public void deleteAllData() {
         historicLandmarkRepository.deleteAll();
     }
+
+    @Override
+    public List<HistoricLandmark> findAll() {
+        return historicLandmarkRepository.findAll().stream().sorted().toList();
+    }
+
+    @Override
+    public List<String> findAllRegions() {
+        return historicLandmarkRepository.findAll().stream().map(HistoricLandmark::getRegion).distinct().toList();
+    }
+
+    @Override
+    public List<String> findAllHistoricClass() {
+        return historicLandmarkRepository.findAll().stream().map(HistoricLandmark::getHistoricClass).distinct().toList();
+    }
+
+    @Override
+    public List<HistoricLandmark> searchByName(String text) {
+        return historicLandmarkRepository.findAll().stream().filter(h -> h.getName().toLowerCase()
+                .contains(text.toLowerCase())).sorted().toList();
+    }
+
+
 }

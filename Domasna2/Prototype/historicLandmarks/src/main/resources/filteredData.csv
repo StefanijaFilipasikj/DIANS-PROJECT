@@ -17,9 +17,9 @@ Lat,Lon,Historic,Name,Address,Region
 42.0585741,21.2844339,archaeological_site,Mala Kula - Kuchkovo,Mala Kula - Kuchkovo  Ulica 103  Kuchkovo  North Macedonia,Kuchkovo
 42.1355189,21.7200501,monument,Zena,Zena  Ivo Lola Ribar  1300 Kumanovo  North Macedonia,Kumanovo
 42.0766913,21.398848,archaeological_site,Gradiste kaj s.Brazda,Gradiste kaj s.Brazda  R2239  Brazda  North Macedonia,Brazda
-41.9505936,21.2991931,monument,Manastir Sv. Andrej,Monastery St. Andrej  P?ehrada Matka - hráz  Matka  North Macedonia,Matka
+41.9505936,21.2991931,monument,Manastir Sv. Andrej,Monastery St. Andrej Matka  North Macedonia,Matka
 42.0017233,21.4617772,monument,Filip Vtori,Filip Vtori  Ploshtad Avtokomanda  1001 Skopje  North Macedonia,Skopje
-41.9984602,21.4349949,memorial,Filip II Makedonski,Philip II of Macedon  Karpoš Uprising Square  1111 Skopje  North Macedonia,Skopje
+41.9984602,21.4349949,memorial,Filip II Makedonski,Philip II of Macedon  Karposh Uprising Square  1111 Skopje  North Macedonia,Skopje
 41.9983057,21.4254968,memorial,Sv. Kliment Ohridski,Clement of Ohrid  Bulevar Sveti Kliment Ohridski  1111 Skopje  North Macedonia,Skopje
 41.9993163,21.437162,memorial,Skenderbeg,Skanderbeg  Skanderbeg Square  1111 Skopje  North Macedonia,Skopje
 40.8570205,21.1195933,monument,Markova Noga,Markova Noga  R1308  Dolno Dupeni  North Macedonia,Dolno Dupeni
@@ -73,12 +73,12 @@ Lat,Lon,Historic,Name,Address,Region
 41.9952169,21.426153,memorial,Josip Broz Tito,Josip Broz Tito  Dimitrie ?upovski  1000 Skopje  North Macedonia,Skopje
 41.9682709,21.4313461,ruins,Markovi Kuli,Markovi Kuli  R2138  1054 Skopje  North Macedonia,Skopje
 41.139367,22.5093733,monument,Leonid Jankov,Leonid Jankov  Ilindenska  1480 Gevgelija  North Macedonia,Gevgelija
-41.9977079,21.4339766,memorial,Sv. Kiril i Metodij,Karpoš Uprising Square  1111 Skopje  North Macedonia,Skopje
-41.9975624,21.4341509,memorial,Sv. Kliment Ohridski i Naum Ohridski Chudotvorec,Saints Clement of Ohrid and Naum  Karpoš Uprising Square  1111 Skopje  North Macedonia,Skopje
+41.9977079,21.4339766,memorial,Sv. Kiril i Metodij,Karposh Uprising Square  1111 Skopje  North Macedonia,Skopje
+41.9975624,21.4341509,memorial,Sv. Kliment Ohridski i Naum Ohridski Chudotvorec,Saints Clement of Ohrid and Naum  Karposh Uprising Square  1111 Skopje  North Macedonia,Skopje
 41.9953917,21.4313414,memorial,Car Samoil,Macedonia Square  1000 Skopje  North Macedonia,Skopje
 41.9964949,21.4321474,memorial,Dame Gruev,Dame Gruev  Macedonia Square  1111 Skopje  North Macedonia,Skopje
 41.9968799,21.4323054,memorial,Justinijan I,Justinian I  Macedonia Square  1111 Skopje  North Macedonia,Skopje
-41.9979046,21.4344182,memorial,Olimpija,Fontana „Olimpija - Majka na Aleksandar III Makedonski“  Karpoš Uprising Square  1111 Skopje  North Macedonia,Skopje
+41.9979046,21.4344182,memorial,Olimpija,Fontana "Olimpija - Majka na Aleksandar III Makedonski"  Karposh Uprising Square  1111 Skopje  North Macedonia,Skopje
 41.993303,21.4337226,monument,Prometej,Prometheus  11-ti Oktomvri  1111 Skopje  North Macedonia,Skopje
 41.9834333,21.439106,monument,Todor Aleksandrov,Todor Aleksandrov  Ivan Kozarov  1111 Skopje  North Macedonia,Skopje
 41.986749,21.4369668,monument,Stara Rampa,Stara Rampa  Bulevar Makedonija  1111 Skopje  North Macedonia,Skopje
@@ -91,7 +91,7 @@ Lat,Lon,Historic,Name,Address,Region
 41.9130467,21.4333848,castle,Vila Varvarka,Vila Varvarka  R1106  1050 Rakotinci  North Macedonia,Rakotinci
 41.9949279,21.4108745,monument,Spomenik na Jurij Gagarin,Yuri Gagarin Monument  Jurij Gagarin  1020 Skopje  North Macedonia,Skopje
 41.9930188,21.4332009,monument,Nikola Karev,Nikola Karev  11-ti Oktomvri  1111 Skopje  North Macedonia,Skopje
-42.0016804,21.4283664,monument,Vera Jocikj,Vera Jocik  Jordan Hadžikonstantinov Džinot  1111 Skopje  North Macedonia,Skopje
+42.0016804,21.4283664,monument,Vera Jocikj,Vera Jocik  Jordan Hadzhikonstantinov Djinot  1111 Skopje  North Macedonia,Skopje
 41.3455416,21.5532375,monument,Marko Mrnjavchevikj,Marko Mrnjavchevikj  Metodija Andonov - Chento  7500 Prilep  North Macedonia,Prilep
 41.3450704,21.5505634,monument,Krume Kepeski,Krume Kepeski  Art Square  7500 Prilep  North Macedonia,Prilep
 41.3451329,21.5506707,monument,Blazhe Koneski,Blazhe Koneski  Art Square  7500 Prilep  North Macedonia,Prilep
@@ -103,7 +103,7 @@ Lat,Lon,Historic,Name,Address,Region
 41.1736526,20.6783749,monument,Sergej Esenin,Sergej Esenin  6330 Struga  North Macedonia,Struga
 42.0769461,22.1823517,monument,Emin-begova kula,Emin Bey Tower  Skopska  Kratovo  North Macedonia,Kratovo
 42.0768838,22.1826261,monument,Krsteva kula,Krste's Tower  Skopska  Kratovo  North Macedonia,Kratovo
-41.1949939,22.6878453,monument,Spomenik „Solunski front“ od I svetska vojna,World War I Salonica Front memorial  Marshal Tito  1487 Star Dojran  North Macedonia,Star Dojran
+41.1949939,22.6878453,monument,Spomenik "Solunski front" od I svetska vojna,World War I Salonica Front memorial  Marshal Tito  1487 Star Dojran  North Macedonia,Star Dojran
 42.0768628,22.1822635,monument,Hadzhikostova kula,Hadji Kostov Tower  Josif Daskalov  Kratovo  North Macedonia,Kratovo
 42.0792053,22.1818109,monument,Saat-kula,Clock Tower  Brakja Miladinovi  Kratovo  North Macedonia,Kratovo
 42.0788289,22.1809805,monument,Zlatkovicheva kula,Zlatkovich Tower  Goce Delchev  Kratovo  North Macedonia,Kratovo
@@ -111,7 +111,7 @@ Lat,Lon,Historic,Name,Address,Region
 41.4409796,22.6796979,monument,Strumica-Kristal-64,Strumica-Kristal-64  A4  2400 Dabilje  North Macedonia,Dabilje
 41.1142035,20.7958058,tomb,Grigor Prlichev,Grigor Prlicev grave  Kiril i Metodij  6000 Ohrid  North Macedonia,Ohrid
 40.8878546,20.9724068,monument,Monument Kulture,Monument Kulture  SH79  Bashkia Pustec  North Macedonia,Bashkia Pustec
-41.006774,21.3415263,yes,Sv. Troica,St. Trinity  Pande Ilkovski  7000 Bitola  North Macedonia,Bitola
+41.006774,21.3415263,monument,Sv. Troica,St. Trinity  Pande Ilkovski  7000 Bitola  North Macedonia,Bitola
 41.1755185,20.6781791,memorial,Jovo Stefanovski - Rile,Poetry park  R1208  6330 Struga  North Macedonia,Struga
 41.05924,20.8033957,wayside_shrine,Sv. Blagoveshtenie,Sv. Blagoveshtenie  Metropol Hotel - Konjsko  Dolno Konjsko  North Macedonia,Dolno Konjsko
 41.9963577,21.4323793,memorial,Goce Delchev,Macedonia Square  1111 Skopje  North Macedonia,Skopje
@@ -162,7 +162,7 @@ Lat,Lon,Historic,Name,Address,Region
 41.1150206,20.7949057,city_gate,Gorna Porta,Upper Gate  Ilindenska  6000 Ohrid  North Macedonia,Ohrid
 41.4528994,20.9658462,battlefield,Bitkata na Gjurgjejca,Battle of Gjurgjejca  Pateka kon s.Kladnik / repetitor  6250 Karbunica  North Macedonia,Karbunica
 41.8646892,21.942062,monument,Spomenik Sv. Nikola,Monument of St. Nicholas  Ploshtad Ilinden  2220 Sveti Nikole  North Macedonia,Sveti Nikole
-41.8644645,21.9410121,monument,Spomenik „Lazar Kolishevski“,"Spomenik „Lazar Kolishevski“  City square ""Ilinden""  2220 Sveti Nikole  North Macedonia",Sveti Nikole
+41.8644645,21.9410121,monument,Spomenik "Lazar Kolishevski","Spomenik "Lazar Kolishevski"  City square ""Ilinden""  2220 Sveti Nikole  North Macedonia",Sveti Nikole
 41.8627557,21.9386585,memorial,Sv. Ilija,Sv. Ilija  Angel Trajchev  2220 Sveti Nikole  North Macedonia,Sveti Nikole
 41.9156602,22.412778,monument,Spomenik na Nikola Karev,Monument to Nikola Karev  Kej na revolucijata  2300 Kochani  North Macedonia,Kochani
 41.3464944,21.5629735,memorial,Kire Gavriloski-Jane / Krume Volnaroski-Kolja,Kire Gavriloski-Jane / Krume Volnaroski-Kolja  Spase Temelkoski  7510 Prilep  North Macedonia,Prilep
@@ -175,17 +175,17 @@ Lat,Lon,Historic,Name,Address,Region
 41.9998618,21.4485415,monument,General Mihailo Apostolski,General Mihailo Apostolski  Bulevar Aleksandar Makedonski  1001 Skopje  North Macedonia,Skopje
 41.9988251,21.4506665,memorial,General Mihajlo Apostolski,General Mihajlo Apostolski  Belasica  1001 Skopje  North Macedonia,Skopje
 41.9960184,21.4412009,monument,Krste Petkov Misirkov,Krste Petkov Misirkov  Kej Dimitar Vlahov  1001 Skopje  North Macedonia,Skopje
-41.9960802,21.4408764,monument,Blaže Koneski,Blaže Koneski  Bulevar Krste Petkov Misirkov  1001 Skopje  North Macedonia,Skopje
+41.9960802,21.4408764,monument,Blaze Koneski,Blaze Koneski  Bulevar Krste Petkov Misirkov  1001 Skopje  North Macedonia,Skopje
 41.0108476,21.3208996,wayside_shrine,Sv. Georgij,Kanalka 1  7000 Lavci  North Macedonia,Lavci
 41.1119818,20.799333,monument,Fakjach na chesniot krst,Fakjach na chesniot krst  Tsar Samoil  6000 Ohrid  North Macedonia,Ohrid
-41.9945304,21.4326511,monument,Pavel Shatev,Pavel Šatev  11-ti Oktomvri  1111 Skopje  North Macedonia,Skopje
+41.9945304,21.4326511,monument,Pavel Shatev,Pavel Shatev  11-ti Oktomvri  1111 Skopje  North Macedonia,Skopje
 41.993726,21.4332709,memorial,Nevena Georgieva-Dunja,Nevena Georgieva-Dunja  11-ti Oktomvri  1111 Skopje  North Macedonia,Skopje
 42.0640097,21.0288552,monument,Gjoko Lazarevski,Gjoko Lazarevski  R1203  1200 Leshok  North Macedonia,Leshok
 42.0700178,21.027212,tomb,Teodorit,Old monastery of Leshok  R1203  Leshok  North Macedonia,Leshok
 42.0669654,21.0282911,tomb,Kiril Pejchinovikj-Tetoec,Kiril Pejchinovikj-Tetoec  R1203  1200 Leshok  North Macedonia,Leshok
 42.0668701,21.0285176,monument,Zaginati Leshochani vo vojnite 1903-2001,New monastery of Leshok  R1203  1200 Leshok  North Macedonia,Leshok
 41.1141534,20.798276,memorial,Nada Fileva,Nada Fileva  11-ti Oktomvri  6000 Ohrid  North Macedonia,Ohrid
-42.0043082,21.4185013,memorial,Dane kraptzew,Dane kraptzew  Albert Ajnštajn  1000 Skopje  North Macedonia,Skopje
+42.0043082,21.4185013,memorial,Dane kraptzew,Dane kraptzew  Albert Ajnshtajn  1000 Skopje  North Macedonia,Skopje
 41.9918182,21.4296159,memorial,Atentat na Kiro Gligorov,Atentat of Kiro Gligorov  Makedonija  1111 Skopje  North Macedonia,Skopje
 41.3643261,21.6070578,wayside_shrine,Sv. Petka,R1101  7510 Lenishte  North Macedonia,Lenishte
 41.9135927,22.4105061,monument,Brakjata Prosvetiteli Sv. Kiril i Metodij,OU Kiril i Metodij  Gligor Apostolov Gocho  2300 Kochani  North Macedonia,Kochani
@@ -193,6 +193,6 @@ Lat,Lon,Historic,Name,Address,Region
 41.204511,21.4572557,tomb,Bratska grobnica,Bratska grobnica  R2340  7512 Klepach  North Macedonia,Klepach
 41.4286415,21.6200758,tomb,Igumenija Katerina,Igumenija Katerina  R1312  Prisad  North Macedonia,Prisad
 41.8768098,22.5027575,castle,Viniko Kale,Viniko Kale  30 Avgust  2310 Vinica  North Macedonia,Vinica
-41.9964125,21.4328484,memorial,Spomenik „Solunski atentatori i Gemidzhii“,Spomenik „Solunski atentatori i Gemidzhii“  Kej 13-ti Noemvri  1111 Skopje  North Macedonia,Skopje
+41.9964125,21.4328484,memorial,Spomenik "Solunski atentatori i Gemidzhii",Spomenik "Solunski atentatori i Gemidzhii"  Kej 13-ti Noemvri  1111 Skopje  North Macedonia,Skopje
 41.9538189,21.288822,ruins,Sveta Troica i Sveti Gjorgjija,Holy Trinity and Holy George  Sveta Nedela  Matka  North Macedonia,Matka
 41.8117124,21.1617392,archaeological_site,Golema Pesh,Golema Pesht  R1106  Zdunje  North Macedonia,Zdunje

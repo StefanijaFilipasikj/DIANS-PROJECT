@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Historic_Landmarks")
 @NoArgsConstructor
 @AllArgsConstructor
-public class HistoricLandmark {
+public class HistoricLandmark implements Comparable<HistoricLandmark>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,4 +20,9 @@ public class HistoricLandmark {
     private String name;
     private String address;
     private String Region;
+
+    @Override
+    public int compareTo(HistoricLandmark o) {
+        return name.compareTo(o.getName());
+    }
 }
