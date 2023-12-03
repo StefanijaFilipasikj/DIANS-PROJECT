@@ -15,7 +15,12 @@
 <div class="d-flex">
     <div id="map"></div>
     <nav id="landmark-list" class="flex-column list-group">
-        <div class="m-2 p-1 list-group-item list-group-item-action" th:each="landmark : ${landmarks}"
+        <div th:if="${hasAny == false}" class="m-2 p-1 list-group-item list-group-item-action">
+            <h5>Nothing matched your search</h5>
+            <div>try searching something else</div>
+            <div> </div>
+        </div>
+        <div th:if="${hasAny == true}" class="m-2 p-1 list-group-item list-group-item-action" th:each="landmark : ${landmarks}"
              th:lat="${landmark.getLat()}" th:lon="${landmark.getLon()}" onclick="selectLandmark(this.getAttribute('lat'), this.getAttribute('lon'));">
             <h5 th:text="${landmark.getName()}"></h5>
             <div th:text="${landmark.getRegion()}"></div>

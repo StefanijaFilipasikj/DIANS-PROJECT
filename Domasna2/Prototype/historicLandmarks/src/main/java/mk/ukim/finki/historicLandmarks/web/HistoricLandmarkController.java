@@ -26,8 +26,10 @@ public class HistoricLandmarkController {
 
     @RequestMapping(path = "/feedData")
     public void setDataInDB(){
-        // commented to stop from changing the data
-        // historicLandmarkService.saveData();
+        //in case someone searches /database/feedData more than once we delete than load the database.
+        //if you see this comment the next two lines so that there aren't any unnecessary deletes and loads.
+        historicLandmarkService.deleteAllData();
+        historicLandmarkService.saveData();
     }
 
     @GetMapping(value = "/all")

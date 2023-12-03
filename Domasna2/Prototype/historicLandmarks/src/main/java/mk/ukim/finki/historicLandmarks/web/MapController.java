@@ -35,6 +35,12 @@ public class MapController {
             landmarks = landmarks.stream().filter(h -> h.getHistoricClass()
                     .equals(historicLandmarkService.removeCapitalize(historicClass))).toList();
         }
+        if(landmarks.isEmpty()){
+            model.addAttribute("hasAny", false);
+            landmarks = historicLandmarkService.findAll();
+        }else{
+            model.addAttribute("hasAny", true);
+        }
         model.addAttribute("landmarks", landmarks);
         model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
         model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
