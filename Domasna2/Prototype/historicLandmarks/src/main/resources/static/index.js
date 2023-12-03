@@ -1,3 +1,13 @@
+jQuery(function($) {
+    console.log("Before Slick Initialization");
+    $(".carousel").slick({
+        slidesToShow: 1,
+        prevArrow: '<div style="font-size: 25px" class="slick-prev fa fa-chevron-left"></div>',
+        nextArrow: '<div style="font-size: 25px" class="slick-next fa fa-chevron-right"></div>',
+    });
+});
+
+
 let landmarks = document.getElementById("landmarksVar").innerHTML
 let listLandmarks = landmarks.split("), HistoricLandmark");
 listLandmarks = listLandmarks.map(each => each.concat(")").replace("[","").replace(", HistoricLandmark(",'HistoricLandmark('));
@@ -32,6 +42,8 @@ function selectLandmark(lat, lon){
     console.log(lon)
     map.fitBounds([[parseFloat(lat), parseFloat(lon)]]);
 }
+
+
 
 // function addMarker(){
 //     var newMarker = L.marker([42.0195738, 20.960153]).addTo(map);

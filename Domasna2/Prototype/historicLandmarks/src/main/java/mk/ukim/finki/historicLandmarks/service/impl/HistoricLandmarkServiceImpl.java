@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
@@ -58,12 +60,35 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
 
     @Override
     public List<String> findAllRegions() {
-        return historicLandmarkRepository.findAll().stream().map(HistoricLandmark::getRegion).distinct().toList();
+        return historicLandmarkRepository.findAll().stream().map(HistoricLandmark::getRegion).distinct().sorted().toList();
     }
 
     @Override
     public List<String> findAllHistoricClass() {
-        return historicLandmarkRepository.findAll().stream().map(HistoricLandmark::getHistoricClass).distinct().toList();
+        List<String> a = historicLandmarkRepository.findAll().stream()
+                .map(HistoricLandmark::getHistoricClass)
+                .distinct().toList();
+        return capitalize(a);
+    }
+
+    @Override
+    public List<String> capitalize(List<String> list) {
+        return list.stream().map(elem -> {
+            String[] parts = elem.split("_");
+            for (int i = 0; i < parts.length; i++) {
+                parts[i] = parts[i].substring(0, 1).toUpperCase() + parts[i].substring(1);
+            }
+            return String.join(" ", parts);
+        }).sorted().toList();
+    }
+
+    @Override
+    public String removeCapitalize(String s) {
+        String[] parts = s.split(" ");
+        for (int i = 0; i < parts.length; i++) {
+            parts[i] = parts[i].substring(0, 1).toLowerCase() + parts[i].substring(1);
+        }
+        return String.join("_", parts);
     }
 
     @Override
@@ -71,6 +96,4 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
         return historicLandmarkRepository.findAll().stream().filter(h -> h.getName().toLowerCase()
                 .contains(text.toLowerCase())).sorted().toList();
     }
-
-
 }

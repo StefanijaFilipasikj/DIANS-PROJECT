@@ -27,7 +27,7 @@ public class HistoricLandmarkController {
     @RequestMapping(path = "/feedData")
     public void setDataInDB(){
         // commented to stop from changing the data
-        //historicLandmarkService.saveData();
+        // historicLandmarkService.saveData();
     }
 
     @GetMapping(value = "/all")
