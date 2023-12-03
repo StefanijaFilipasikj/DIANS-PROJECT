@@ -32,10 +32,11 @@ public class MapController {
             landmarks = landmarks.stream().filter(h -> h.getRegion().equals(region)).toList();
         }
         if(historicClass != null && !historicClass.equals("")){
-            landmarks = landmarks.stream().filter(h -> h.getHistoricClass().equals(historicClass)).toList();
+            landmarks = landmarks.stream().filter(h -> h.getHistoricClass()
+                    .equals(historicLandmarkService.removeCapitalize(historicClass))).toList();
         }
         model.addAttribute("landmarks", landmarks);
-        model.addAttribute("regions", historicLandmarkService.findAllRegions());
+        model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
         model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
         model.addAttribute("bodyContent", "map-page");
         return "master-template";
