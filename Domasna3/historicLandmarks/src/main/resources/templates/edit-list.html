@@ -1,0 +1,60 @@
+<section style="background-image: url('/img/map.png'); background-size: cover; height: 93vh">
+  <div class="d-flex justify-content-left form-inline">
+    <form th:method="GET" th:action="@{/map/edit-list}" id="search-monument-form">
+      <input type="text" name="text" class="form-control" placeholder="Search...">
+      <select id="regionSelect" name="region" class="form-control search-by">
+        <option disabled selected value>Search by city</option>
+        <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
+      </select>
+      <select id="classSelect" name="historicClass" class="form-control search-by">
+        <option disabled selected value>Search by type</option>
+        <option th:each="historicClass : ${historicClasses}" th:value="${historicClass}" th:text="${historicClass}"></option>
+      </select>
+      <button type="submit" class="fa fa-search btn search-button form-control"></button>
+    </form>
+  </div>
+  <div class="table-container">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="centre">Lon</th>
+        <th class="centre">Lat</th>
+        <th class="centre">Name</th>
+        <th class="centre">Class</th>
+        <th class="centre">Region</th>
+        <th class="centre">Address</th>
+        <th class="centre"> </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="landmark : ${landmarks}">
+        <td th:text="${landmark.getLon()}"></td>
+        <td th:text="${landmark.getLat()}"></td>
+        <td th:text="${landmark.getName()}"></td>
+        <td th:text="${landmark.getHistoricClass()}"></td>
+        <td th:text="${landmark.getRegion()}"></td>
+        <td th:text="${landmark.getAddress()}"></td>
+        <td>
+          <div class="buttons">
+            <a th:href="@{'/map/add-landmark/{id}' (id=${landmark.getId()}) }" class="btn btn-sm btn-success"><i class="fa fa-edit">Edit</i></a>
+            <a th:href="@{'/map/delete-landmark/{id}' (id=${landmark.getId()}) }" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <th:block th:if="${hasError}">
+    <div th:text="${error}" class="text-danger"></div>
+  </th:block>
+  <div class="col mb-3">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <a href="/map/add-landmark" class="btn btn-block btn-dark">
+          Add new historical landmark
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
