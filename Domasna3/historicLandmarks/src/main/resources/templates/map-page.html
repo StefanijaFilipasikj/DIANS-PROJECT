@@ -23,11 +23,19 @@
             <div>try searching something else</div>
             <div> </div>
         </div>
-        <div th:if="${hasAny == true}" class="m-2 p-1 list-group-item list-group-item-action" th:each="landmark : ${landmarks}"
-             th:lat="${landmark.getLat()}" th:lon="${landmark.getLon()}" onclick="selectLandmark(this.getAttribute('lat'), this.getAttribute('lon'));">
-            <h5 th:text="${landmark.getName()}"></h5>
-            <div th:text="${landmark.getRegion()}"></div>
-            <div th:text="${landmark.getHistoricClass()}"></div>
+        <div id="accordion" th:if="${hasAny == true}">
+            <th:block th:each="landmark : ${landmarks}">
+                <div class="m-2 p-1 list-group-item list-group-item-action" th:lat="${landmark.getLat()}" th:lon="${landmark.getLon()}" onclick="selectLandmark(this.getAttribute('lat'), this.getAttribute('lon'));">
+                    <h3 class="card-header">
+                        <b><p th:text="${landmark.getName()}"></p></b>
+                        <p th:text="${landmark.getRegion()}"></p>
+                        <p th:text="${landmark.getHistoricClass()}"></p>
+                    </h3>
+                    <div class="card-body">
+                        <div th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 160px; width: 236px; background-size: cover;'"></div>
+                    </div>
+                </div>
+            </th:block>
         </div>
     </nav>
 </div>

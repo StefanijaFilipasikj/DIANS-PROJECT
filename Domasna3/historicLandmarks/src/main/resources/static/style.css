@@ -21,24 +21,49 @@
 select.search-by{
     max-width: 200px;
 }
+
+/*LANDMARKS NAV - MAP PAGE*/
+
 #landmark-list{
     position: absolute;
     right: 0;
     display: inline-block;
     height: 95vh;
-    width: 360px;
+    width: 370px;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 2;
 }
 #landmark-list > div{
-    width: 330px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
+    width: 360px;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
-#landmark-list>div:hover, .user-button:hover{
+#landmark-list>div>*:hover, .user-button:hover{
     cursor: pointer;
 }
+#landmark-list > div > div{
+    width: 320px;
+}
+.ui-state-active{
+    color: black;
+    background: rgba(245, 245, 245, 0.9);
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+}
+.ui-accordion-content{
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #d0d0d0;
+}
+.card-header > p{
+    margin: 0;
+    color: #2a2a2a;
+}
+.card-body{
+
+}
+/*------------------------*/
+
 .search-button{
     background-color: white;
     height: calc(1.5em + .75rem + 2px);

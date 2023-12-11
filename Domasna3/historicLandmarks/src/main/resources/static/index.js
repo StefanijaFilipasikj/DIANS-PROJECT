@@ -1,12 +1,28 @@
 jQuery(function($) {
-    console.log("Before Slick Initialization");
     $(".carousel").slick({
         slidesToShow: 1,
         prevArrow: '<div style="font-size: 25px" class="slick-prev fa fa-chevron-left"></div>',
         nextArrow: '<div style="font-size: 25px" class="slick-next fa fa-chevron-right"></div>',
     });
-});
+    $("#accordion" ).accordion({
+        header: "> div > h3",
+        collapsible: true,
+        icons: null,
+        heightStyle: "content",
+        active: false,
+        activate: function (event, ui) {
+            if (!ui.newHeader.length) return; // No new header
 
+            // Calculate the target scroll position relative to the top of the page
+            var scrollPosition = ui.newHeader.offset().top - $("#landmark-list").offset().top;
+
+            // Scroll to the target position
+            $('#landmark-list').animate({
+                scrollTop: '+=' + (scrollPosition - 23)
+            }, 'fast');
+        }
+    });
+});
 
 let landmarks = document.getElementById("landmarksVar").innerHTML
 let listLandmarks = landmarks.split("), HistoricLandmark");
