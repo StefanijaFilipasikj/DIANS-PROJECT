@@ -1,0 +1,47 @@
+<header xmlns:th="http://www.thymeleaf.org" id="header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <!--<a class="navbar-brand" href="/home"> Historic landmarks in North Macedonia</a>-->
+            <a class="navbar-brand" href="/home"><img style="height: 35px;" th:src="@{/img/logo.png}"/></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item m-auto">
+                        <a class="nav-link active" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item m-auto">
+                        <a class="nav-link active" href="/map">Map</a>
+                    </li>
+                    <li class="nav-item m-auto">
+                        <a class="nav-link active" href="/about-us">About us</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li th:if="${session.user == null}" class="nav-item">
+                        <!--<a class="btn btn-light btn-sm ml-3" href="/register">-->
+                        <a class="btn btn-light btn-sm ml-3 user-button" title="not implemented yet">
+                            <i class="fa fa-user-plus"></i> Register
+                        </a>
+                    </li>
+                    <li th:if="${session.user == null}" class="nav-item">
+                        <!--<a class="btn btn-light btn-sm ml-3" href="/login">-->
+                        <a class="btn btn-light btn-sm ml-3 user-button" title="not implemented yet">
+                            <i class="fa fa-user"></i> Login
+                        </a>
+                    </li>
+                    <li th:if="${session.user != null}" class="nav-item">
+                        <!--<a class="btn btn-light btn-sm ml-3" href="/logout">-->
+                        <a class="btn btn-light btn-sm ml-3 user-button" title="not implemented yet">
+                            <i class="fa fa-user-times"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

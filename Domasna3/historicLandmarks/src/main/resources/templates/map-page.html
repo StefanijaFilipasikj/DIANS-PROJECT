@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-left form-inline">
+    <form th:method="GET" th:action="@{/map}" id="search-monument-form">
+        <input type="text" name="text" class="form-control" placeholder="Search...">
+        <select id="regionSelect" name="region" class="form-control search-by">
+            <option disabled selected value>Search by city</option>
+            <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
+        </select>
+        <select id="classSelect" name="historicClass" class="form-control search-by">
+            <option disabled selected value>Search by type</option>
+            <option th:each="historicClass : ${historicClasses}" th:value="${historicClass}" th:text="${historicClass}"></option>
+        </select>
+        <button type="submit" class="fa fa-search btn search-button form-control"></button>
+    </form>
+</div>
+<div class="d-flex">
+    <div id="map"></div>
+    <nav id="landmark-list" class="flex-column list-group">
+        <div th:if="${hasAny == false}" class="m-2 p-1 list-group-item list-group-item-action">
+            <h5>Nothing matched your search</h5>
+            <div>try searching something else</div>
+            <div> </div>
+        </div>
+        <div th:if="${hasAny == true}" class="m-2 p-1 list-group-item list-group-item-action" th:each="landmark : ${landmarks}"
+             th:lat="${landmark.getLat()}" th:lon="${landmark.getLon()}" onclick="selectLandmark(this.getAttribute('lat'), this.getAttribute('lon'));">
+            <h5 th:text="${landmark.getName()}"></h5>
+            <div th:text="${landmark.getRegion()}"></div>
+            <div th:text="${landmark.getHistoricClass()}"></div>
+        </div>
+    </nav>
+</div>

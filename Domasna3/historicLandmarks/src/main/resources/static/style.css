@@ -1,0 +1,65 @@
+#map{
+    position: relative;
+    width: 100vw;
+    height: 95vh;
+    z-index: 1;
+}
+#search-monument-form{
+    margin: 8px;
+    padding: 10px;
+    /*background-color: rgba(255, 255, 255, 1);*/
+    /*border: 2px solid rgba(0,0,0,0.3);*/
+    /*border-radius: 4px;*/
+    position: absolute;
+    left: 40px;
+    top: 60px;
+    z-index: 2;
+}
+.leaflet-control-zoom.leaflet-bar.leaflet-control{
+    border: 1px solid rgb(206 212 218);
+}
+select.search-by{
+    max-width: 200px;
+}
+#landmark-list{
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    height: 95vh;
+    width: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 2;
+}
+#landmark-list > div{
+    width: 330px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+#landmark-list>div:hover, .user-button:hover{
+    cursor: pointer;
+}
+.search-button{
+    background-color: white;
+    height: calc(1.5em + .75rem + 2px);
+    border: 1px solid rgb(206 212 218);
+}
+.search-button:hover{
+    background-color: rgb(244 244 244);
+}
+#aboutUS > div{
+    width: 60vw;
+    margin: 4px auto auto;
+    z-index: 2;
+}
+.slick-prev,
+.slick-next {
+    float: left;
+    position: absolute;
+    left: -50px;
+    top: 50%
+}
+.slick-next {
+    left: auto;
+    right: -50px;
+}
