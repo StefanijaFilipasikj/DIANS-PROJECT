@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -59,6 +60,11 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     }
 
     @Override
+    public Optional<HistoricLandmark> findById(Long id) {
+        return historicLandmarkRepository.findById(id);
+    }
+
+    @Override
     public List<String> findAllRegions() {
         return historicLandmarkRepository.findAll().stream().map(HistoricLandmark::getRegion).distinct().sorted().toList();
     }
@@ -69,6 +75,14 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
                 .map(HistoricLandmark::getHistoricClass)
                 .distinct().toList();
         return capitalize(a);
+    }
+
+    @Override
+    public List<String> findAllHistoricClassRaw() {
+        List<String> a = historicLandmarkRepository.findAll().stream()
+                .map(HistoricLandmark::getHistoricClass)
+                .distinct().toList();
+        return a;
     }
 
     @Override
@@ -95,5 +109,20 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     public List<HistoricLandmark> searchByName(String text) {
         return historicLandmarkRepository.findAll().stream().filter(h -> h.getName().toLowerCase()
                 .contains(text.toLowerCase())).sorted().toList();
+    }
+
+    @Override
+    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String region, String address) {
+        return historicLandmarkRepository.editLandmarkById(landmarkId,name,landmarkClass,lat,lon,region,address);
+    }
+
+    @Override
+    public Optional<HistoricLandmark> save(String lat, String lon, String landmarkClass, String name, String address, String region) {
+        return Optional.of(historicLandmarkRepository.save(new HistoricLandmark(Double.parseDouble(lat),Double.parseDouble(lon),landmarkClass,name,address,region)));
+    }
+
+    @Override
+    public void delete(Long id) {
+        historicLandmarkRepository.deleteById(id);
     }
 }

@@ -15,6 +15,9 @@
 <div class="d-flex">
     <div id="map"></div>
     <nav id="landmark-list" class="flex-column list-group">
+<!--        <div class="m-2 p-1 list-group-item list-group-item-action edit" th:if="${user.getRole() == adminRole}">-->
+<!--            <a  href="/map/edit-list" class="btn btn-block btn-dark add-product-btn">Edit List</a>-->
+<!--        </div>-->
         <div th:if="${hasAny == false}" class="m-2 p-1 list-group-item list-group-item-action">
             <h5>Nothing matched your search</h5>
             <div>try searching something else</div>
