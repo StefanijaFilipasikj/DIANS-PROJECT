@@ -18,15 +18,17 @@ public class HistoricLandmark implements Comparable<HistoricLandmark>{
     private String name;
     private String address;
     private String region;
+    @Lob //Large Object
     private String photoUrl;
 
-    public HistoricLandmark(double lat, double lon, String historicClass, String name, String address, String region) {
+    public HistoricLandmark(double lat, double lon, String historicClass, String name, String address, String region, String photoUrl) {
         this.lat = lat;
         this.lon = lon;
         this.historicClass = historicClass;
         this.name = name;
         this.address = address;
         this.region = region;
+        this.photoUrl = photoUrl;
     }
 
     public HistoricLandmark() {

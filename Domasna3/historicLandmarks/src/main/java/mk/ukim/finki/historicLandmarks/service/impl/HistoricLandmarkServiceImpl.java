@@ -31,7 +31,7 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
             String header = br.readLine(); //skip header
             while ((line = br.readLine())!=null){
                 String [] data = line.split(",",-1);
-                if (data.length == 6){
+                if (data.length == 7){
                     HistoricLandmark hl = new HistoricLandmark();
                     hl.setLat(Double.parseDouble(data[0]));
                     hl.setLon(Double.parseDouble(data[1]));
@@ -39,7 +39,7 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
                     hl.setName(data[3]);
                     hl.setAddress(data[4]);
                     hl.setRegion(data[5]);
-
+                    hl.setPhotoUrl(data[6]);
                     historicLandmarkRepository.save(hl);
                 }
             }
@@ -112,13 +112,13 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     }
 
     @Override
-    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String region, String address) {
-        return historicLandmarkRepository.editLandmarkById(landmarkId,name,landmarkClass,lat,lon,region,address);
+    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String address, String region, String photoUrl) {
+        return historicLandmarkRepository.editLandmarkById(landmarkId,name,landmarkClass,lat,lon,address,region,photoUrl);
     }
 
     @Override
-    public Optional<HistoricLandmark> save(String lat, String lon, String landmarkClass, String name, String address, String region) {
-        return Optional.of(historicLandmarkRepository.save(new HistoricLandmark(Double.parseDouble(lat),Double.parseDouble(lon),landmarkClass,name,address,region)));
+    public Optional<HistoricLandmark> save(String lat, String lon, String landmarkClass, String name, String address, String region, String photoUrl) {
+        return Optional.of(historicLandmarkRepository.save(new HistoricLandmark(Double.parseDouble(lat),Double.parseDouble(lon),landmarkClass,name,address,region,photoUrl)));
     }
 
     @Override

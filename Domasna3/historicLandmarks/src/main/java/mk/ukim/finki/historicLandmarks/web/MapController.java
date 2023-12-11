@@ -102,12 +102,13 @@ public class MapController {
                               @RequestParam String lon,
                               @RequestParam String region,
                               @RequestParam String address,
-                              @RequestParam String landmarkId){
+                              @RequestParam String landmarkId,
+                              @RequestParam String photoUrl){
         if (landmarkId!=null && !landmarkId.isEmpty()){
-            historicLandmarkService.edit(landmarkId,name,landmarkClass,lat,lon,region,address);
+            historicLandmarkService.edit(landmarkId,name,landmarkClass,lat,lon,region,address, photoUrl);
         }
         else {
-            historicLandmarkService.save(lat,lon,landmarkClass,name,address,region);
+            historicLandmarkService.save(lat,lon,landmarkClass,name,address,region, photoUrl);
         }
         return "redirect:/map/edit-list";
     }
