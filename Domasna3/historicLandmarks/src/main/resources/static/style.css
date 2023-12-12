@@ -21,24 +21,49 @@
 select.search-by{
     max-width: 200px;
 }
+
+
+/*LANDMARKS NAV - MAP PAGE*/
 #landmark-list{
     position: absolute;
     right: 0;
     display: inline-block;
     height: 95vh;
-    width: 360px;
+    width: 400px;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 2;
 }
 #landmark-list > div{
-    width: 330px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
+    width: 380px;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
-#landmark-list>div:hover, .user-button:hover{
+#landmark-list>div>*:hover, .user-button:hover{
     cursor: pointer;
 }
+#landmark-list > div > div{
+    width: 350px;
+}
+.ui-state-active{
+    color: black;
+    background: rgba(245, 245, 245, 0.9);
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+}
+.ui-accordion-content{
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #d0d0d0;
+}
+.card-header > p{
+    margin: 0;
+    color: #2a2a2a;
+}
+.card-body{
+
+}
+/*------------------------*/
+
 .search-button{
     background-color: white;
     height: calc(1.5em + .75rem + 2px);
@@ -83,3 +108,39 @@ select.search-by{
 #addLandmark{
     padding-top: 1px;
 }
+
+
+/*SVG STAR RATING*/
+.rating {
+    display: inline-block;
+    width: 86.5px;
+    height: 16px;
+    position: relative;
+    background-color: #919191;
+}
+
+.rating progress.rating-bg {
+    -webkit-appearance: none;
+    -moz-appearence: none;
+    appearance: none;
+    border: none;
+    display: inline-block;
+    height: 16px;
+    width: 100%;
+    color: rgb(255,200,0);
+}
+
+.rating progress.rating-bg::-webkit-progress-value {
+    background-color: rgb(255,200,0);
+}
+.rating progress.rating-bg::-moz-progress-bar {
+    background-color: rgb(255,200,0);
+}
+.rating svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/*---------------*/

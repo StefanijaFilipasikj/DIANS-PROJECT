@@ -1,6 +1,8 @@
 package mk.ukim.finki.historicLandmarks.web;
 
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
+import mk.ukim.finki.historicLandmarks.model.User;
+import mk.ukim.finki.historicLandmarks.repository.UserRepository;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,11 @@ import java.util.List;
 public class HistoricLandmarkController {
 
     private final HistoricLandmarkService historicLandmarkService;
+    private final UserRepository userRepository;
 
-    public HistoricLandmarkController(HistoricLandmarkService historicLandmarkService) {
+    public HistoricLandmarkController(HistoricLandmarkService historicLandmarkService, UserRepository userRepository) {
         this.historicLandmarkService = historicLandmarkService;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(path = "/feedData")
@@ -37,4 +41,16 @@ public class HistoricLandmarkController {
         ResponseEntity<List<HistoricLandmark>> responseEntity = new ResponseEntity<>(historicLandmarkService.findAll(), HttpStatus.OK);
         return responseEntity;
     }
+
+    @GetMapping(value = "/users")
+    public ResponseEntity<List<User>> GetUsers(){
+
+        User u = new User("john.doe@gmail.com", "jd", "John", "Doe", "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg");
+        userRepository.save(u);
+
+
+        ResponseEntity<List<User>> responseEntity = new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        return responseEntity;
+    }
+
 }

@@ -2,8 +2,11 @@ package mk.ukim.finki.historicLandmarks.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
+import mk.ukim.finki.historicLandmarks.model.User;
 import mk.ukim.finki.historicLandmarks.model.enumerations.UserRoles;
+import mk.ukim.finki.historicLandmarks.repository.UserRepository;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
+import mk.ukim.finki.historicLandmarks.service.ReviewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +17,13 @@ import java.util.List;
 @RequestMapping("/map")
 public class MapController {
     private final HistoricLandmarkService historicLandmarkService;
+    private final ReviewService reviewService;
+    private final UserRepository userRepository;
 
-    public MapController(HistoricLandmarkService historicLandmarkService) {
+    public MapController(HistoricLandmarkService historicLandmarkService, ReviewService reviewService, UserRepository userRepository) {
         this.historicLandmarkService = historicLandmarkService;
+        this.reviewService = reviewService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -102,12 +109,13 @@ public class MapController {
                               @RequestParam String lon,
                               @RequestParam String region,
                               @RequestParam String address,
-                              @RequestParam String landmarkId){
+                              @RequestParam String landmarkId,
+                              @RequestParam String photoUrl){
         if (landmarkId!=null && !landmarkId.isEmpty()){
-            historicLandmarkService.edit(landmarkId,name,landmarkClass,lat,lon,region,address);
+            historicLandmarkService.edit(landmarkId,name,landmarkClass,lat,lon,region,address, photoUrl);
         }
         else {
-            historicLandmarkService.save(lat,lon,landmarkClass,name,address,region);
+            historicLandmarkService.save(lat,lon,landmarkClass,name,address,region, photoUrl);
         }
         return "redirect:/map/edit-list";
     }
@@ -130,5 +138,17 @@ public class MapController {
         historicLandmarkService.delete(id);
         model.addAttribute("bodyContent","edit-list");
         return "master-template";
+    }
+
+    @PostMapping("/add-review/{id}")
+    public String addReviewToLandmark(@PathVariable Long id,
+                                      @RequestParam String comment,
+                                      @RequestParam Double rating,
+                                      HttpServletRequest request){
+        HistoricLandmark landmark = historicLandmarkService.findById(id).get();
+        //User user = (User)request.getSession().getAttribute("user");
+        User user = this.userRepository.findById(1L).get();
+        reviewService.addReview(landmark, user, comment, rating);
+        return "redirect:/map";
     }
 }

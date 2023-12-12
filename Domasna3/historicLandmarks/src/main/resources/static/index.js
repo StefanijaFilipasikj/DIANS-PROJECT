@@ -1,12 +1,51 @@
 jQuery(function($) {
-    console.log("Before Slick Initialization");
     $(".carousel").slick({
         slidesToShow: 1,
         prevArrow: '<div style="font-size: 25px" class="slick-prev fa fa-chevron-left"></div>',
         nextArrow: '<div style="font-size: 25px" class="slick-next fa fa-chevron-right"></div>',
     });
+    $("#accordion" ).accordion({
+        header: "> div > h3",
+        collapsible: true,
+        icons: null,
+        heightStyle: "content",
+        active: false,
+        activate: function (event, ui) {
+            if (!ui.newHeader.length) return; // No new header
+
+            // Calculate the target scroll position relative to the top of the page
+            var scrollPosition = ui.newHeader.offset().top - $("#landmark-list").offset().top;
+
+            // Scroll to the target position
+            $('#landmark-list').animate({
+                scrollTop: '+=' + (scrollPosition - 15)
+            }, 'fast');
+        }
+    });
 });
 
+const editButtons = document.querySelectorAll(".edit-btn");
+const reviewForms = document.querySelectorAll(".review-form");
+const reviewDisplays = document.querySelectorAll(".review-display");
+editButtons.forEach(button => {
+    button.addEventListener("click", function(event) {
+        event.preventDefault();
+        const reviewId = this.getAttribute("data-review-id");
+        const landmarkId = this.getAttribute("data-landmark-id");
+        const editForm = document.querySelector(`form.edit-form[data-review-id="${reviewId}"]`);
+        const reviewForm = document.querySelector(`div.review-form[data-review-id="${landmarkId}"]`);
+        const display = document.querySelector(`div.review-display[data-review-id="${reviewId}"]`);
+        if(editForm.style.display === "none"){
+            editForm.style.display = "block";
+            reviewForm.style.display = "none";
+            // display.style.display = "none";
+        }else{
+            editForm.style.display = "none";
+            reviewForm.style.display = "block";
+            // display.style.display = "block";
+        }
+    });
+});
 
 let landmarks = document.getElementById("landmarksVar").innerHTML
 let listLandmarks = landmarks.split("), HistoricLandmark");
@@ -38,8 +77,6 @@ if(landmarks.length!==0)
     map.fitBounds(landmarks);
 
 function selectLandmark(lat, lon){
-    console.log(lat)
-    console.log(lon)
     map.fitBounds([[parseFloat(lat), parseFloat(lon)]]);
 }
 

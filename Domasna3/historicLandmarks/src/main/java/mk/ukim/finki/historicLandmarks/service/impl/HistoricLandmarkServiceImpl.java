@@ -2,6 +2,8 @@ package mk.ukim.finki.historicLandmarks.service.impl;
 
 
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
+import mk.ukim.finki.historicLandmarks.model.Review;
+import mk.ukim.finki.historicLandmarks.model.User;
 import mk.ukim.finki.historicLandmarks.repository.HistoricLandmarkRepository;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +34,7 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
             String header = br.readLine(); //skip header
             while ((line = br.readLine())!=null){
                 String [] data = line.split(",",-1);
-                if (data.length == 6){
+                if (data.length == 7){
                     HistoricLandmark hl = new HistoricLandmark();
                     hl.setLat(Double.parseDouble(data[0]));
                     hl.setLon(Double.parseDouble(data[1]));
@@ -39,7 +42,7 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
                     hl.setName(data[3]);
                     hl.setAddress(data[4]);
                     hl.setRegion(data[5]);
-
+                    hl.setPhotoUrl(data[6]);
                     historicLandmarkRepository.save(hl);
                 }
             }
@@ -112,13 +115,13 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     }
 
     @Override
-    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String region, String address) {
-        return historicLandmarkRepository.editLandmarkById(landmarkId,name,landmarkClass,lat,lon,region,address);
+    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String address, String region, String photoUrl) {
+        return historicLandmarkRepository.editLandmarkById(landmarkId,name,landmarkClass,lat,lon,address,region,photoUrl);
     }
 
     @Override
-    public Optional<HistoricLandmark> save(String lat, String lon, String landmarkClass, String name, String address, String region) {
-        return Optional.of(historicLandmarkRepository.save(new HistoricLandmark(Double.parseDouble(lat),Double.parseDouble(lon),landmarkClass,name,address,region)));
+    public Optional<HistoricLandmark> save(String lat, String lon, String landmarkClass, String name, String address, String region, String photoUrl) {
+        return Optional.of(historicLandmarkRepository.save(new HistoricLandmark(Double.parseDouble(lat),Double.parseDouble(lon),landmarkClass,name,address,region,photoUrl)));
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface HistoricLandmarkRepository extends JpaRepository<HistoricLandmark,Long> {
 
     @Transactional
-    default Optional<HistoricLandmark> editLandmarkById(String landmarkId, String name, String landmarkClass, String lat, String lon, String region, String address) {
+    default Optional<HistoricLandmark> editLandmarkById(String landmarkId, String name, String landmarkClass, String lat, String lon, String address, String region, String photoUrl) {
         Optional<HistoricLandmark> optionalLandmark = findById(Long.parseLong(landmarkId));
 
         optionalLandmark.ifPresent(landmark -> {
@@ -19,8 +19,9 @@ public interface HistoricLandmarkRepository extends JpaRepository<HistoricLandma
             landmark.setHistoricClass(landmarkClass);
             landmark.setLon(Double.parseDouble(lon));
             landmark.setLat(Double.parseDouble(lat));
-            landmark.setRegion(region);
             landmark.setAddress(address);
+            landmark.setRegion(region);
+            landmark.setPhotoUrl(photoUrl);
             save(landmark);
         });
 
