@@ -1,6 +1,7 @@
 package mk.ukim.finki.historicLandmarks.service;
 
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
+import mk.ukim.finki.historicLandmarks.model.User;
 
 import java.util.List;
 import java.util.Optional;

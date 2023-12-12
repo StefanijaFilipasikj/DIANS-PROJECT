@@ -2,6 +2,8 @@ package mk.ukim.finki.historicLandmarks.service.impl;
 
 
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
+import mk.ukim.finki.historicLandmarks.model.Review;
+import mk.ukim.finki.historicLandmarks.model.User;
 import mk.ukim.finki.historicLandmarks.repository.HistoricLandmarkRepository;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

@@ -18,8 +18,31 @@ jQuery(function($) {
 
             // Scroll to the target position
             $('#landmark-list').animate({
-                scrollTop: '+=' + (scrollPosition - 23)
+                scrollTop: '+=' + (scrollPosition - 15)
             }, 'fast');
+        }
+    });
+});
+
+const editButtons = document.querySelectorAll(".edit-btn");
+const reviewForms = document.querySelectorAll(".review-form");
+const reviewDisplays = document.querySelectorAll(".review-display");
+editButtons.forEach(button => {
+    button.addEventListener("click", function(event) {
+        event.preventDefault();
+        const reviewId = this.getAttribute("data-review-id");
+        const landmarkId = this.getAttribute("data-landmark-id");
+        const editForm = document.querySelector(`form.edit-form[data-review-id="${reviewId}"]`);
+        const reviewForm = document.querySelector(`div.review-form[data-review-id="${landmarkId}"]`);
+        const display = document.querySelector(`div.review-display[data-review-id="${reviewId}"]`);
+        if(editForm.style.display === "none"){
+            editForm.style.display = "block";
+            reviewForm.style.display = "none";
+            // display.style.display = "none";
+        }else{
+            editForm.style.display = "none";
+            reviewForm.style.display = "block";
+            // display.style.display = "block";
         }
     });
 });
@@ -54,8 +77,6 @@ if(landmarks.length!==0)
     map.fitBounds(landmarks);
 
 function selectLandmark(lat, lon){
-    console.log(lat)
-    console.log(lon)
     map.fitBounds([[parseFloat(lat), parseFloat(lon)]]);
 }
 

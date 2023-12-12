@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-left form-inline">
+<div class="d-flex justify-content-left form-inline" xmlns:th="http://www.w3.org/1999/html">
     <form th:method="GET" th:action="@{/map}" id="search-monument-form">
         <input type="text" name="text" class="form-control" placeholder="Search...">
         <select id="regionSelect" name="region" class="form-control search-by">
@@ -33,6 +33,65 @@
                     </h3>
                     <div class="card-body">
                         <div th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 160px; width: 236px; background-size: cover;'"></div>
+                        <b><p th:text="${landmark.getName()}"></p></b>
+                        <b>Address: </b><p th:text="${landmark.getAddress()}"></p>
+                        <span th:text="${landmark.getRating()}"></span>
+                        <svg style="display:none;">
+                            <defs>
+                                <symbol id="fivestars">
+                                    <path d="M9 0l2.573 5.294 5.827.803-4.24 4.073 1.027 5.726-5.14-2.748-5.14 2.748 1.027-5.726-4.24-4.073 5.827-.803z M0 0 h17.4 v17.4 h-17.4 v-17.4" fill="white" fill-rule="evenodd"/>
+                                </symbol>
+                            </defs>
+                        </svg>
+
+                        <div class="rating">
+                            <progress class="rating-bg" th:value="${landmark.getRating()}" max="5"></progress>
+                            <svg>
+                                <use xlink:href="#fivestars"/>
+                                <use xlink:href="#fivestars" transform="translate(17.2)"/>
+                                <use xlink:href="#fivestars" transform="translate(34.4)"/>
+                                <use xlink:href="#fivestars" transform="translate(51.6)"/>
+                                <use xlink:href="#fivestars" transform="translate(69.1)"/>
+                            </svg>
+                        </div>
+                        (<th:span th:text="${landmark.getNumberOfReviews()}"></th:span>)
+                        <p></p>
+                        <div th:if="${landmark.getNumberOfReviews()} > 0" th:each="review : ${landmark.getReviews()}">
+                            <div style="display: flex; align-items: flex-start; margin-bottom: 10px;" class="review-display" th:data-review-id="${review.getId()}">
+                                <div th:style="'background-image: url(' + ${review.getUser().getPhotoUrl()} + '); height: 40px; width: 40px; background-size: cover; border-radius:50%; margin-right: 8px;'"></div>
+                                <div style="flex: 1;">
+                                    <b><span th:text="${review.getUser().getUsername()}"></span></b>
+                                    <span th:text="${review.getComment()}"></span>
+                                </div>
+
+                                <!--<div th:if="${session.user.getId() == review.getUser().getId()}">-->
+                                <div>
+                                    <th:block>
+                                        <a th:href="@{'/review/delete/{id}/{landmarkId}' (id=${review.getId()}, landmarkId=${landmark.getId()})}" style="font-size: 12px; padding: 2px 4px; width: 22px; margin-bottom: 4px;" class="btn btn-light btn-outline-secondary fa fa-trash"></a>
+                                    </th:block>
+                                    <br>
+                                    <th:block>
+                                        <a href="#" class="edit-btn btn btn-light btn-outline-secondary fa fa-edit" th:data-review-id="${review.getId()}" th:data-landmark-id="${landmark.getId()}" style="font-size: 12px; padding: 2px 4px; width: 22px;"></a>
+                                    </th:block>
+                                </div>
+                            </div>
+                            <hr/>
+                            <form th:action="@{'/review/edit/{id}' (id=${review.getId()})}" th:method="post" th:data-review-id="${review.getId()}" style="display: none;" class="edit-form">
+                                <input class="form-control" type="number" name="editRating" th:value="${review.getRating()}" min="1" max="5" step="0.1"/>
+                                <textarea class="form-control" name="editComment" th:text="${review.getComment()}"></textarea>
+                                <button class="btn btn-light" type="submit">Save</button>
+                            </form>
+                        </div>
+
+                        <!--<div th:if="${session.user != null}" class="review-form" th:data-review-id="${landmark.getId()}">-->
+                        <div class="review-form" th:data-review-id="${landmark.getId()}">
+                            <form th:action="@{'/map/add-review/{id}' (id=${landmark.getId()})}" th:method="post">
+                                <input name="rating" type="number" class="form-control" placeholder="enter rating"
+                                    min="1" max="5" step="0.1" required>
+                                <textarea name="comment" class="form-control" placeholder="write comment" required></textarea>
+                                <button type="submit" class="btn btn-light">Add Review</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </th:block>
