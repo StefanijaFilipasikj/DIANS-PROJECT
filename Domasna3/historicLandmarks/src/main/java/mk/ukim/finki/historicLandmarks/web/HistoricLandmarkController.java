@@ -2,7 +2,9 @@ package mk.ukim.finki.historicLandmarks.web;
 
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
 import mk.ukim.finki.historicLandmarks.model.User;
+import mk.ukim.finki.historicLandmarks.model.enumerations.UserRoles;
 import mk.ukim.finki.historicLandmarks.repository.UserRepository;
+import mk.ukim.finki.historicLandmarks.service.AuthService;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +23,10 @@ import java.util.List;
 public class HistoricLandmarkController {
 
     private final HistoricLandmarkService historicLandmarkService;
-    private final UserRepository userRepository;
-
-    public HistoricLandmarkController(HistoricLandmarkService historicLandmarkService, UserRepository userRepository) {
+    private final AuthService authService;
+    public HistoricLandmarkController(HistoricLandmarkService historicLandmarkService, UserRepository userRepository, AuthService authService) {
         this.historicLandmarkService = historicLandmarkService;
-        this.userRepository = userRepository;
+        this.authService = authService;
     }
 
     @RequestMapping(path = "/feedData")
@@ -45,11 +46,9 @@ public class HistoricLandmarkController {
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> GetUsers(){
 
-        User u = new User("john.doe@gmail.com", "jd", "John", "Doe", "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg");
-        userRepository.save(u);
+//        authService.register("username@admin", "DIANS", "DIANS", "Dians", "Proekt", "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg");
 
-
-        ResponseEntity<List<User>> responseEntity = new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        ResponseEntity<List<User>> responseEntity = new ResponseEntity<>(authService.findAll(), HttpStatus.OK);
         return responseEntity;
     }
 
