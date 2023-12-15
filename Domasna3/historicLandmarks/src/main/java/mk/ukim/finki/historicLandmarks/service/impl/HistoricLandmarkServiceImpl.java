@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -127,5 +128,12 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     @Override
     public void delete(Long id) {
         historicLandmarkRepository.deleteById(id);
+    }
+
+    @Override
+    public List<HistoricLandmark> findTop10() {
+        return this.historicLandmarkRepository.findAll().stream()
+                .sorted(Comparator.comparing(HistoricLandmark::getRating).reversed())
+                .limit(10).collect(Collectors.toList());
     }
 }

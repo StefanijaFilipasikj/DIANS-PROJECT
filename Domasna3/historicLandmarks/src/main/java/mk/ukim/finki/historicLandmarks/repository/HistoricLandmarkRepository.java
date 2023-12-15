@@ -27,4 +27,5 @@ public interface HistoricLandmarkRepository extends JpaRepository<HistoricLandma
 
         return optionalLandmark;
     }
+
 }
