@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -51,6 +52,20 @@ public class MapController {
         model.addAttribute("landmarks", landmarks);
         model.addAttribute("user", req.getSession().getAttribute("user"));
         model.addAttribute("adminRole", UserRoles.ADMIN);
+        model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
+        model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
+        model.addAttribute("bodyContent", "map-page");
+        return "master-template";
+    }
+
+    @GetMapping("/random")
+    public String getRandom(Model model, HttpServletRequest req){
+        List<HistoricLandmark> landmarks = new ArrayList<>();
+        landmarks.add(this.historicLandmarkService.findRandomLandmark());
+        model.addAttribute("landmarks", landmarks);
+        model.addAttribute("hasAny", true);
+        model.addAttribute("adminRole", UserRoles.USER);
+        model.addAttribute("user", req.getSession().getAttribute("user"));
         model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
         model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
         model.addAttribute("bodyContent", "map-page");

@@ -22,4 +22,5 @@ public interface HistoricLandmarkService {
     Optional<HistoricLandmark> save(String name,String landmarkClass,String lat,String lon,String region,String address, String photoUrl);
     void delete(Long id);
     List<HistoricLandmark> findTop10();
+    HistoricLandmark findRandomLandmark();
 }
