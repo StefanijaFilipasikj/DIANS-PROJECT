@@ -5,6 +5,7 @@ import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
 import mk.ukim.finki.historicLandmarks.model.User;
 import mk.ukim.finki.historicLandmarks.model.enumerations.UserRoles;
 import mk.ukim.finki.historicLandmarks.repository.UserRepository;
+import mk.ukim.finki.historicLandmarks.service.AuthService;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import mk.ukim.finki.historicLandmarks.service.ReviewService;
 import org.springframework.stereotype.Controller;
@@ -19,12 +20,12 @@ import java.util.List;
 public class MapController {
     private final HistoricLandmarkService historicLandmarkService;
     private final ReviewService reviewService;
-    private final UserRepository userRepository;
+    private final AuthService authService;
 
-    public MapController(HistoricLandmarkService historicLandmarkService, ReviewService reviewService, UserRepository userRepository) {
+    public MapController(HistoricLandmarkService historicLandmarkService, ReviewService reviewService, UserRepository userRepository, AuthService authService) {
         this.historicLandmarkService = historicLandmarkService;
         this.reviewService = reviewService;
-        this.userRepository = userRepository;
+        this.authService = authService;
     }
 
     @GetMapping
@@ -51,7 +52,7 @@ public class MapController {
         }
         model.addAttribute("landmarks", landmarks);
         model.addAttribute("user", req.getSession().getAttribute("user"));
-        model.addAttribute("adminRole", UserRoles.ADMIN);
+        model.addAttribute("admin", UserRoles.ADMIN);
         model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
         model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
         model.addAttribute("bodyContent", "map-page");
@@ -161,8 +162,7 @@ public class MapController {
                                       @RequestParam Double rating,
                                       HttpServletRequest request){
         HistoricLandmark landmark = historicLandmarkService.findById(id).get();
-        //User user = (User)request.getSession().getAttribute("user");
-        User user = this.userRepository.findById(1L).get();
+        User user = (User)request.getSession().getAttribute("user");
         reviewService.addReview(landmark, user, comment, rating);
         return "redirect:/map";
     }

@@ -15,9 +15,9 @@
 <div class="d-flex">
     <div id="map"></div>
     <nav id="landmark-list" class="flex-column list-group">
-<!--        <div class="m-2 p-1 list-group-item list-group-item-action edit" th:if="${user.getRole() == adminRole}">-->
-<!--            <a  href="/map/edit-list" class="btn btn-block btn-dark add-product-btn">Edit List</a>-->
-<!--        </div>-->
+                <div class="m-2 p-1 list-group-item list-group-item-action edit" th:if="${session.user != null && session.user.getRole() == admin}">
+                    <a  href="/map/edit-list" class="btn btn-block btn-dark add-product-btn">Edit List</a>
+                </div>
         <div th:if="${hasAny == false}" class="m-2 p-1 list-group-item list-group-item-action">
             <h5>Nothing matched your search</h5>
             <div>try searching something else</div>
@@ -64,8 +64,7 @@
                                     <span th:text="${review.getComment()}"></span>
                                 </div>
 
-                                <!--<div th:if="${session.user.getId() == review.getUser().getId()}">-->
-                                <div>
+                                <div th:if="${session.user != null && session.user.getId() == review.getUser().getId()}">
                                     <th:block>
                                         <a th:href="@{'/review/delete/{id}/{landmarkId}' (id=${review.getId()}, landmarkId=${landmark.getId()})}" style="font-size: 12px; padding: 2px 4px; width: 22px; margin-bottom: 4px;" class="btn btn-light btn-outline-secondary fa fa-trash"></a>
                                     </th:block>
@@ -83,15 +82,16 @@
                             </form>
                         </div>
 
-                        <!--<div th:if="${session.user != null}" class="review-form" th:data-review-id="${landmark.getId()}">-->
+                        <div th:if="${session.user != null}" class="review-form" th:data-review-id="${landmark.getId()}">
                         <div class="review-form" th:data-review-id="${landmark.getId()}">
                             <form th:action="@{'/map/add-review/{id}' (id=${landmark.getId()})}" th:method="post">
                                 <input name="rating" type="number" class="form-control" placeholder="enter rating"
-                                    min="1" max="5" step="0.1" required>
+                                       min="1" max="5" step="0.1" required>
                                 <textarea name="comment" class="form-control" placeholder="write comment" required></textarea>
                                 <button type="submit" class="btn btn-light">Add Review</button>
                             </form>
                         </div>
+                    </div>
                     </div>
                 </div>
             </th:block>
