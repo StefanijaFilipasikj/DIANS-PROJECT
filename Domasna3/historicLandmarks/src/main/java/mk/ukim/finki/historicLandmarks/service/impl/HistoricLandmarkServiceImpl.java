@@ -12,8 +12,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,6 +23,7 @@ import java.util.stream.Stream;
 public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
 
     private final HistoricLandmarkRepository historicLandmarkRepository;
+    private static Random random = new Random();
 
     public HistoricLandmarkServiceImpl(HistoricLandmarkRepository historicLandmarkRepository) {
         this.historicLandmarkRepository = historicLandmarkRepository;
@@ -127,5 +130,18 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     @Override
     public void delete(Long id) {
         historicLandmarkRepository.deleteById(id);
+    }
+
+    @Override
+    public List<HistoricLandmark> findTop10() {
+        return this.historicLandmarkRepository.findAll().stream()
+                .sorted(Comparator.comparing(HistoricLandmark::getRating).reversed())
+                .limit(10).collect(Collectors.toList());
+    }
+
+    @Override
+    public HistoricLandmark findRandomLandmark() {
+        int index = random.nextInt((int)this.historicLandmarkRepository.count());
+        return this.historicLandmarkRepository.findAll().get(index);
     }
 }
