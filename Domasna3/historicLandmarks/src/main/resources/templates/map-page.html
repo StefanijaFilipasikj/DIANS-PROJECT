@@ -35,7 +35,7 @@
                         <div th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 160px; width: 236px; background-size: cover;'"></div>
                         <b><p th:text="${landmark.getName()}"></p></b>
                         <b>Address: </b><p th:text="${landmark.getAddress()}"></p>
-                        <span th:text="${landmark.getRating()}"></span>
+                        <span class="landmark-rating" th:text="${#numbers.formatDecimal(landmark.getRating(),1,1)}"></span>
                         <svg style="display:none;">
                             <defs>
                                 <symbol id="fivestars">
@@ -54,37 +54,37 @@
                                 <use xlink:href="#fivestars" transform="translate(69.1)"/>
                             </svg>
                         </div>
-                        (<th:span th:text="${landmark.getNumberOfReviews()}"></th:span>)
+                        (<th:span th:text="${landmark.getNumberOfReviews()}" th:class="numReviews"></th:span>)
                         <p></p>
-                        <div th:if="${landmark.getNumberOfReviews()} > 0" th:each="review : ${landmark.getReviews()}">
-                            <div style="display: flex; align-items: flex-start; margin-bottom: 10px;" class="review-display" th:data-review-id="${review.getId()}">
+                        <hr/>
+                        <div class="review-container" th:if="${landmark.getNumberOfReviews()} > 0" th:each="review : ${landmark.getReviews()}">
+                            <div style="display: flex; align-items: flex-start; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid rgb(230 230 230);" class="review-display" th:data-review-id="${review.getId()}">
                                 <div th:style="'background-image: url(' + ${review.getUser().getPhotoUrl()} + '); height: 40px; width: 40px; background-size: cover; border-radius:50%; margin-right: 8px;'"></div>
                                 <div style="flex: 1;">
-                                    <b><span th:text="${review.getUser().getUsername()}"></span></b>
-                                    <span th:text="${review.getComment()}"></span>
+                                    <b><span class="review-username" th:text="${review.getUser().getUsername()}"></span></b>
+                                    <span class="review-comment" th:text="${review.getComment()}"></span>
                                 </div>
 
-                                <div th:if="${session.user != null && session.user.getId() == review.getUser().getId()}">
+                                <div th:if="${session.user != null && session.user.getId() == review.getUser().getId()}" style="margin-left: 5px;">
                                     <th:block>
-                                        <a th:href="@{'/review/delete/{id}/{landmarkId}' (id=${review.getId()}, landmarkId=${landmark.getId()})}" style="font-size: 12px; padding: 2px 4px; width: 22px; margin-bottom: 4px;" class="btn btn-light btn-outline-secondary fa fa-trash"></a>
+                                        <a th:data-review-id="${review.getId()}" th:data-landmark-id="${landmark.getId()}" style="font-size: 12px; padding: 2px 4px; width: 22px; margin-bottom: 4px;" class="btn btn-light btn-outline-secondary fa fa-trash delete-review-button"></a>
                                     </th:block>
                                     <br>
                                     <th:block>
-                                        <a href="#" class="edit-btn btn btn-light btn-outline-secondary fa fa-edit" th:data-review-id="${review.getId()}" th:data-landmark-id="${landmark.getId()}" style="font-size: 12px; padding: 2px 4px; width: 22px;"></a>
+                                        <a th:data-review-id="${review.getId()}" th:data-landmark-id="${landmark.getId()}" style="font-size: 12px; padding: 2px 4px; width: 22px;" class="btn btn-light btn-outline-secondary fa fa-edit edit-review-button"></a>
                                     </th:block>
                                 </div>
                             </div>
-                            <hr/>
-                            <form th:action="@{'/review/edit/{id}' (id=${review.getId()})}" th:method="post" th:data-review-id="${review.getId()}" style="display: none;" class="edit-form">
+                            <form th:action="@{'/review/edit/{id}/{landmarkId}' (id=${review.getId()}, landmarkId=${landmark.getId()})}" th:method="post" th:data-review-id="${review.getId()}" th:data-landmark-id="${landmark.getId()}" style="display: none; border-bottom: 1px solid rgb(230 230 230); padding-bottom: 10px; margin-bottom: 10px;" class="edit-form">
                                 <input class="form-control" type="number" name="editRating" th:value="${review.getRating()}" min="1" max="5" step="0.1"/>
-                                <textarea class="form-control" name="editComment" th:text="${review.getComment()}"></textarea>
-                                <button class="btn btn-light" type="submit">Save</button>
+                                <textarea class="form-control" name="editComment" th:text="${review.getComment()}" th:value="${review.getComment()}"></textarea>
+                                <button class="btn btn-light save-edited-review-button" type="submit" th:data-review-id="${review.getId()}">Save</button>
                             </form>
                         </div>
-
-                        <div th:if="${session.user != null}" class="review-form" th:data-review-id="${landmark.getId()}">
-                        <div class="review-form" th:data-review-id="${landmark.getId()}">
-                            <form th:action="@{'/map/add-review/{id}' (id=${landmark.getId()})}" th:method="post">
+                        <span class="endOfReviews"></span>
+                        <div th:if="${session.user != null}" th:data-landmark-id="${landmark.getId()}">
+                        <div class="review-form" th:data-landmark-id="${landmark.getId()}">
+                            <form th:action="@{'/review/add-review/{id}' (id=${landmark.getId()})}" th:method="post">
                                 <input name="rating" type="number" class="form-control" placeholder="enter rating"
                                        min="1" max="5" step="0.1" required>
                                 <textarea name="comment" class="form-control" placeholder="write comment" required></textarea>

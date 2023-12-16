@@ -2,18 +2,23 @@ package mk.ukim.finki.historicLandmarks.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
+import mk.ukim.finki.historicLandmarks.model.Review;
 import mk.ukim.finki.historicLandmarks.model.User;
 import mk.ukim.finki.historicLandmarks.model.enumerations.UserRoles;
 import mk.ukim.finki.historicLandmarks.repository.UserRepository;
 import mk.ukim.finki.historicLandmarks.service.AuthService;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import mk.ukim.finki.historicLandmarks.service.ReviewService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/map")
@@ -154,16 +159,5 @@ public class MapController {
         historicLandmarkService.delete(id);
         model.addAttribute("bodyContent","edit-list");
         return "master-template";
-    }
-
-    @PostMapping("/add-review/{id}")
-    public String addReviewToLandmark(@PathVariable Long id,
-                                      @RequestParam String comment,
-                                      @RequestParam Double rating,
-                                      HttpServletRequest request){
-        HistoricLandmark landmark = historicLandmarkService.findById(id).get();
-        User user = (User)request.getSession().getAttribute("user");
-        reviewService.addReview(landmark, user, comment, rating);
-        return "redirect:/map";
     }
 }

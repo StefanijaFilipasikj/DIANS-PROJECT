@@ -16,19 +16,17 @@ import java.time.LocalDateTime;
 public class ReviewServiceImpl implements ReviewService {
 
     private final HistoricLandmarkRepository historicLandmarkRepository;
-    private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
 
     public ReviewServiceImpl(HistoricLandmarkRepository historicLandmarkRepository,
                              UserRepository userRepository,
                              ReviewRepository reviewRepository) {
         this.historicLandmarkRepository = historicLandmarkRepository;
-        this.userRepository = userRepository;
         this.reviewRepository = reviewRepository;
     }
     @Override
     @Transactional
-    public void addReview(HistoricLandmark landmark, User user, String comment, Double rating) {
+    public Review addReview(HistoricLandmark landmark, User user, String comment, Double rating) {
         Review review = new Review(user, comment, rating, LocalDateTime.now());
 
         reviewRepository.save(review);
@@ -36,8 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
         landmark.getReviews().add(review);
         historicLandmarkRepository.save(landmark);
 
-//        user.getReviews().add(review);
-//        userRepository.save(user);
+        return review;
     }
 
     @Override
@@ -55,5 +52,10 @@ public class ReviewServiceImpl implements ReviewService {
         this.historicLandmarkRepository.save(landmark);
 
         this.reviewRepository.deleteById(id);
+    }
+
+    @Override
+    public Review findById(Long id) {
+        return this.reviewRepository.findById(id).get();
     }
 }

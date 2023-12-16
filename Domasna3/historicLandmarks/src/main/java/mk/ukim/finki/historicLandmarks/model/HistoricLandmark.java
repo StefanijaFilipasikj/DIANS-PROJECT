@@ -1,11 +1,8 @@
 package mk.ukim.finki.historicLandmarks.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.xml.stream.events.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,10 +43,8 @@ public class HistoricLandmark implements Comparable<HistoricLandmark>{
 
     public Double getRating(){
         return reviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
-//        return 0.0;
     }
     public Integer getNumberOfReviews(){
         return reviews.size();
-//        return 0;
     }
 }
