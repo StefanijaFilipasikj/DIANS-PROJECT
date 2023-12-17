@@ -109,6 +109,27 @@ select.search-by{
     padding-top: 1px;
 }
 
+.leaflet-routing-container{
+    display: none;
+}
+
+.leaflet-top.leaflet-right{
+    left: 10px;
+    bottom: 10px;
+    top: auto;
+    right: auto;
+}
+
+.routing-btn{
+    margin-bottom: 10px;
+}
+#progress-bar{
+    width: 150px;
+    height: 24px;
+}
+/*#progress-bar-container{*/
+/*    display: none;*/
+/*}*/
 
 /*SVG STAR RATING*/
 .rating {
