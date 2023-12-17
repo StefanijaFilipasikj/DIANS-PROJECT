@@ -10,6 +10,12 @@
             <option th:each="historicClass : ${historicClasses}" th:value="${historicClass}" th:text="${historicClass}"></option>
         </select>
         <button type="submit" class="fa fa-search btn search-button form-control"></button>
+        <button type="button" onclick="getLocations()" class="bi bi-geo-alt-fill btn search-button form-control" id="route"></button>
+        <div class="form-control" id="progress-bar-container" style="display: none">
+            <div class="progress" id="progress-bar">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+            </div>
+        </div>
     </form>
 </div>
 <div class="d-flex">
@@ -25,7 +31,7 @@
         </div>
         <div id="accordion" th:if="${hasAny == true}">
             <th:block th:each="landmark : ${landmarks}">
-                <div class="m-2 p-1 list-group-item list-group-item-action" th:lat="${landmark.getLat()}" th:lon="${landmark.getLon()}" onclick="selectLandmark(this.getAttribute('lat'), this.getAttribute('lon'));">
+                <div class="m-2 p-1 list-group-item list-group-item-action landmark" th:id="${landmark.getId()}">
                     <h3 class="card-header">
                         <b><p th:text="${landmark.getName()}"></p></b>
                         <p th:text="${landmark.getRegion()}"></p>
@@ -35,6 +41,8 @@
                         <div th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 160px; width: 236px; background-size: cover;'"></div>
                         <b><p th:text="${landmark.getName()}"></p></b>
                         <b>Address: </b><p th:text="${landmark.getAddress()}"></p>
+                        <button type="button" th:lat="${landmark.getLat()}" th:lon="${landmark.getLon()}" onclick="selectLandmark(this.getAttribute('lat'), this.getAttribute('lon'));" class="bi bi-geo-alt-fill routing-btn search-button form-control"> Location</button>
+                        <button type="button" th:lat="${landmark.getLat()}" th:lon="${landmark.getLon()}" onclick="getRouteToLandmark(this.getAttribute('lat'), this.getAttribute('lon'));" class="bi bi-arrow-90deg-right routing-btn search-button form-control" id="routeToLocation"> Directions</button>
                         <span class="landmark-rating" th:text="${#numbers.formatDecimal(landmark.getRating(),1,1)}"></span>
                         <svg style="display:none;">
                             <defs>
