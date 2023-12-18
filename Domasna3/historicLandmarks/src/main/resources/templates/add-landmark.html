@@ -1,11 +1,7 @@
-<section id="addLandmark" class="text-center m-auto flex-column"
-        style="background-image: url('/img/map.png'); background-size: cover;">
-<!--  <div class="container">-->
-<!--    <h1 class="jumbotron-heading">Add landmark</h1>-->
-<!--  </div>-->
-  <div class="container" xmlns:th="http://www.thymeleaf.org">
-    <form class="form-signin mt-xl-5" method="post" action="/map/add">
-      <h2 class="jumbotron-heading">Add landmark</h2>
+<section>
+  <div class="container mt-5">
+    <h2 class="jumbotron-heading text-center" th:text="${add != null} ? 'Add landmark' : 'Edit landmark - ' + ${landmark.getName()}"></h2>
+    <form class="form-signin mt-2" method="post" action="/map/add">
       <div class="form-group">
         <label for="name">Landmark name</label>
         <input id="name" name="name" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getName()} : '')" required placeholder="Enter name">
@@ -14,8 +10,6 @@
       <div class="form-group">
         <label for="landmarkClass">Landmark class</label>
         <select id="landmarkClass" name="landmarkClass" class="form-control">
-<!--          <option th:each="historicClass : ${historicClasses}"-->
-<!--                  th:value="${historicClass}" th:text="${historicClass}"></option>-->
           <option th:if="${landmark!=null}" th:selected="${historicClass == landmark.getHistoricClass()}"
                   th:each="historicClass : ${historicClasses}"
                   th:text="${historicClass}">
@@ -42,21 +36,13 @@
         <label for="address">Landmark address</label>
         <input id="address" name="address" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getAddress()} : '')" required placeholder="Enter address">
       </div>
-
       <hr>
-
       <th:block th:if="${hasError}">
         <div th:text="${error}" class="text-danger"></div>
       </th:block>
-
-      <div class="row">
-        <div class="col-md-3">
-          <button id="submit" class="btn btn-lg btn-dark btn-block" type="submit">Add landmark</button>
-        </div>
-        <div class="col-md-3">
-          <a href="/map/edit-list" class="btn btn-lg btn-block btn-light">Back</a>
-        </div>
-      </div>
+      <button id="submit" class="btn btn-dark btn-block" type="submit">Add landmark</button>
+      <a href="/map/edit-list" class="btn btn-block btn-light">Back</a>
     </form>
   </div>
+  <br/>
 </section>

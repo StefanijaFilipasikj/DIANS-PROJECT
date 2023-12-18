@@ -37,10 +37,13 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 </head>
-<body>
+<body id="body">
 <header th:replace="fragments/header"/>
-<section th:include="${bodyContent}">
+<section class="bodyContent" th:include="${bodyContent}">
 
 </section>
 <footer th:replace="fragments/footer"/>

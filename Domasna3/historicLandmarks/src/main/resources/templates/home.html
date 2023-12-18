@@ -1,19 +1,24 @@
-<section class="jumbotron text-center" style="background-image: url('/img/map.png'); background-size: cover">
+<section class="text-center p-5">
   <div class="container">
     <h1 class="jumbotron-heading">Visit one of the Top 10 Historic landmarks in North Macedonia</h1>
+    <br/>
     <div class="carousel">
       <div th:each="landmark : ${top10Landmarks}"
-           th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 600px; width: 1100px; background-size: cover;'">
+           th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 40em; width: 100%; background-size: cover; background-position: center;'">
       </div>
     </div>
   </div>
-  <br><hr><br>
-  <div class="randomLandmark">
+  <span class="horizontalLine"></span>
+  <div class="randomLandmark container">
     <h1 class="jumbotron-heading">Or let us decide where you should go next</h1>
-    <a href="/map/random" class="btn btn-primary btn-lg fa fa-hand-pointer-o" style="color: white;"> Click Me</a>
+    <br/>
+    <a href="/map/random" class="btn btn-primary btn-lg" style="color: white; border-radius: 1em">
+      Go to a surprising place
+      <span class="bi bi-geo-alt-fill"></span>
+    </a>
   </div>
-  <br><hr><br>
-  <div>
+  <span class="horizontalLine"></span>
+  <div class="container">
     <h1 class="jumbotron-heading">Have Fun!</h1>
     <h3 class="jumbotron-heading">And let us know how it all went</h3>
   </div>

@@ -18,6 +18,7 @@ jQuery(function($) {
             }, 'fast');
         }
     });
+    $('#edit-landmark-table').DataTable();
 });
 
 let reviewForms = document.querySelectorAll(".review-form");
@@ -311,7 +312,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: 'Leaflet &
 
 var greenIcon = L.icon({
     iconUrl: 'img/greenIcon.png',
-    iconSize: [25, 39]
+    iconSize: [25, 40]
 })
 
 for(let i=0;i<landmarks.length;i++){
@@ -480,3 +481,4 @@ function getLocations(){
         list2 = [];
     }, 6500);
 }
+

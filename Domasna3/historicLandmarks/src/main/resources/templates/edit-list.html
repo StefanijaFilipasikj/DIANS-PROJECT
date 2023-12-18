@@ -1,29 +1,29 @@
-<section style="background-image: url('/img/map.png'); background-size: cover;">
-  <div class="d-flex justify-content-left form-inline">
-    <form th:method="GET" th:action="@{/map/edit-list}" id="search-monument-form">
-      <input type="text" name="text" class="form-control" placeholder="Search...">
-      <select id="regionSelect" name="region" class="form-control search-by">
-        <option disabled selected value>Search by city</option>
-        <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
-      </select>
-      <select id="classSelect" name="historicClass" class="form-control search-by">
-        <option disabled selected value>Search by type</option>
-        <option th:each="historicClass : ${historicClasses}" th:value="${historicClass}" th:text="${historicClass}"></option>
-      </select>
-      <button type="submit" class="fa fa-search btn search-button form-control"></button>
-    </form>
-  </div>
-  <div class="table-container">
-    <table class="table table-striped">
+<section style="padding: 0 4em">
+<!--  <div class="d-flex justify-content-left form-inline">-->
+<!--    <form th:method="GET" th:action="@{/map/edit-list}" id="search-monument-form">-->
+<!--      <input type="text" name="text" class="form-control" placeholder="Search...">-->
+<!--      <select id="regionSelect" name="region" class="form-control search-by">-->
+<!--        <option disabled selected value>Search by city</option>-->
+<!--        <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>-->
+<!--      </select>-->
+<!--      <select id="classSelect" name="historicClass" class="form-control search-by">-->
+<!--        <option disabled selected value>Search by type</option>-->
+<!--        <option th:each="historicClass : ${historicClasses}" th:value="${historicClass}" th:text="${historicClass}"></option>-->
+<!--      </select>-->
+<!--      <button type="submit" class="fa fa-search btn search-button form-control"></button>-->
+<!--    </form>-->
+<!--  </div>-->
+  <div class="table-container table-responsive">
+    <table id="edit-landmark-table" class="table table-striped w-100" style="background-color: rgba(255,255,255,0.7)">
       <thead>
       <tr>
-        <th class="centre">Lon</th>
-        <th class="centre">Lat</th>
-        <th class="centre">Name</th>
-        <th class="centre">Class</th>
-        <th class="centre">Region</th>
-        <th class="centre">Address</th>
-        <th class="centre"> </th>
+        <th scope="col">Lon</th>
+        <th scope="col">Lat</th>
+        <th scope="col">Name</th>
+        <th scope="col">Class</th>
+        <th scope="col">Region</th>
+        <th scope="col">Address</th>
+        <th scope="col"> </th>
       </tr>
       </thead>
       <tbody>
