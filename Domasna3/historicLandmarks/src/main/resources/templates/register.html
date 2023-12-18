@@ -1,39 +1,37 @@
-<section class="jumbotron text-center" style="background-image: url('/img/map.png'); background-size: cover">
-<div xmlns:th="http://www.thymeleaf.org">
-        <div class="container mb-4">
-            <form class="form-signin mt-xl-5" method="post" action="/register">
-                <h2 class="form-signin-heading">Register</h2>
-                <p>
-                    <label for="username" class="sr-only">Username</label>
-                    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
-                </p>
-                <p>
-                    <label for="password" class="sr-only">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
-                </p>
-                <p>
-                    <label for="repeatedPassword" class="sr-only">Repeat Password</label>
-                    <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control" placeholder="Repeat Password" required="">
-                </p>
-                <p>
-                    <label for="name" class="sr-only">Name</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" required="" autofocus="">
-                </p>
-                <p>
-                    <label for="surname" class="sr-only">Surname</label>
-                    <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" required="" autofocus="">
-                </p>
-                <p>
-                    <label for="photoUrl" class="sr-only">Photo Url</label>
-                    <input type="text" id="photoUrl" name="photoUrl" class="form-control" placeholder="Photo Url" required="" autofocus="">
-                </p>
-                <th:block th:if="${hasError}">
-                    <div th:text="${error}" class="text-danger"></div>
-                </th:block>
+<section class="text-center">
+    <div class="container mb-4">
+        <form class="form-signin mt-xl-5" method="post" action="/register">
+            <h2 class="form-signin-heading">Register</h2>
+            <p>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+            </p>
+            <p>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+            </p>
+            <p>
+                <label for="repeatedPassword" class="sr-only">Repeat Password</label>
+                <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control" placeholder="Repeat Password" required="">
+            </p>
+            <p>
+                <label for="name" class="sr-only">Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Name" required="" autofocus="">
+            </p>
+            <p>
+                <label for="surname" class="sr-only">Surname</label>
+                <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" required="" autofocus="">
+            </p>
+            <p>
+                <label for="photoUrl" class="sr-only">Photo Url</label>
+                <input type="text" id="photoUrl" name="photoUrl" class="form-control" placeholder="Photo Url" required="" autofocus="">
+            </p>
+            <th:block th:if="${hasError}">
+                <div th:text="${error}" class="text-danger"></div>
+            </th:block>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-            </form>
-            <a href="/login" class="btn btn-lg btn-block btn-light">Already have an account? Login here!</a>
-        </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        </form>
+        <a href="/login" class="btn btn-lg btn-block btn-light">Already have an account? Login here!</a>
     </div>
 </section>

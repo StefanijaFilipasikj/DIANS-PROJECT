@@ -118,6 +118,7 @@ public class MapController {
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
+        model.addAttribute("add", true);
         model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClassRaw());
         model.addAttribute("bodyContent", "add-landmark");
         return "master-template";
