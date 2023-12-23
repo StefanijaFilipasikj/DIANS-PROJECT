@@ -22,11 +22,11 @@
       </div>
       <div class="form-group">
         <label for="lat">Landmark latitude</label>
-        <input id="lat" name="lat" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getLat()} : '')" required placeholder="Enter latitude">
+        <input id="lat" name="lat" type="number" step="0.0000001" class="form-control" th:value="(${landmark!=null} ? ${landmark.getLat()} : '')" required placeholder="Enter latitude">
       </div>
       <div class="form-group">
         <label for="lon">Landmark longitude</label>
-        <input id="lon" name="lon" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getLon()} : '')" required placeholder="Enter longitude">
+        <input id="lon" name="lon" type="number" step="0.0000001" class="form-control" th:value="(${landmark!=null} ? ${landmark.getLon()} : '')" required placeholder="Enter longitude">
       </div>
       <div class="form-group">
         <label for="region">Landmark region</label>
@@ -42,7 +42,10 @@
       </div>
       <hr>
       <th:block th:if="${hasError}">
-        <div th:text="${error}" class="text-danger"></div>
+        <div class="alert alert-danger alert-dismissible fade show">
+          <strong>Error! </strong>
+          <th:block th:text="${error}"></th:block>
+        </div>
       </th:block>
       <button id="submit" class="btn btn-dark btn-block" type="submit">Submit</button>
       <a href="/map/edit-list" class="btn btn-block btn-light">Back</a>

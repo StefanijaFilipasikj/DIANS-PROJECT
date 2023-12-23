@@ -118,7 +118,7 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     }
 
     @Override
-    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String address, String region, String photoUrl) {
+    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String region, String address, String photoUrl) {
         return historicLandmarkRepository.editLandmarkById(landmarkId,name,landmarkClass,lat,lon,address,region,photoUrl);
     }
 

@@ -79,11 +79,11 @@
                                     </div>
 
                                     <div style="margin-left: 5px;">
-                                        <th:block th:if="${#authentication.isAuthenticated() and #authentication.getPrincipal().getUsername() == review.getUser().getUsername()}">
+                                        <th:block sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == review.getUser().getUsername()}">
                                             <a th:data-review-id="${review.getId()}" th:data-landmark-id="${landmark.getId()}" style="font-size: 12px; padding: 2px 4px; width: 22px; margin-bottom: 4px;" class="btn btn-light btn-outline-secondary fa fa-trash delete-review-button"></a>
                                         </th:block >
                                         <br>
-                                        <th:block th:if="${#authentication.isAuthenticated() and #authentication.getPrincipal().getUsername() == review.getUser().getUsername()}">
+                                        <th:block sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == review.getUser().getUsername()}">
                                             <a th:data-review-id="${review.getId()}" th:data-landmark-id="${landmark.getId()}" style="font-size: 12px; padding: 2px 4px; width: 22px;" class="btn btn-light btn-outline-secondary fa fa-edit edit-review-button"></a>
                                         </th:block>
                                     </div>

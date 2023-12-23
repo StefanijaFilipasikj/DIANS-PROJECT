@@ -26,6 +26,7 @@ public class MapController {
     public String getPage(@RequestParam(required = false) String text,
                           @RequestParam(required = false) String region,
                           @RequestParam(required = false) String historicClass,
+                          @RequestParam(required = false) String random,
                           Model model){
         List<HistoricLandmark> landmarks = historicLandmarkService.findAll();
 
@@ -39,12 +40,17 @@ public class MapController {
             landmarks = landmarks.stream().filter(h -> h.getHistoricClass()
                     .equals(historicLandmarkService.removeCapitalize(historicClass))).toList();
         }
+        if(random != null && random.equals("true")){
+            landmarks = new ArrayList<>();
+            landmarks.add(this.historicLandmarkService.findRandomLandmark());
+        }
         if(landmarks.isEmpty()){
             model.addAttribute("hasAny", false);
             landmarks = historicLandmarkService.findAll();
         }else{
             model.addAttribute("hasAny", true);
         }
+
         model.addAttribute("landmarks", landmarks);
         model.addAttribute("admin", Role.ROLE_ADMIN);
         model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
@@ -54,17 +60,8 @@ public class MapController {
     }
 
     @GetMapping("/random")
-    public String getRandom(Model model){
-        List<HistoricLandmark> landmarks = new ArrayList<>();
-
-        landmarks.add(this.historicLandmarkService.findRandomLandmark());
-        model.addAttribute("landmarks", landmarks);
-        model.addAttribute("hasAny", true);
-        model.addAttribute("adminRole", Role.ROLE_USER);
-        model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
-        model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
-        model.addAttribute("bodyContent", "map-page");
-        return "master-template";
+    public String getRandom(    ){
+        return "redirect:/map?random=true";
     }
 
     @GetMapping("/edit-list")

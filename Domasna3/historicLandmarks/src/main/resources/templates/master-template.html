@@ -42,11 +42,11 @@
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 </head>
 <body id="body">
-<header th:replace="fragments/header"/>
-<section class="bodyContent" th:include="${bodyContent}">
+<header th:replace="~{fragments/header}"/>
+<section class="bodyContent" th:include="~{${bodyContent}}">
 
 </section>
-<footer th:replace="fragments/footer"/>
+<footer th:replace="~{fragments/footer}"/>
 <span style="display: none" id="landmarksVar" th:text="${landmarks}" th:value="${landmarks}"></span>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.js"></script>
 <script src="/index.js"></script>
