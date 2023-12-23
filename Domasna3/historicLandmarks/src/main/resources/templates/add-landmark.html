@@ -36,11 +36,15 @@
         <label for="address">Landmark address</label>
         <input id="address" name="address" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getAddress()} : '')" required placeholder="Enter address">
       </div>
+      <div class="form-group">
+        <label for="photoUrl">Landmark address</label>
+        <input id="photoUrl" name="photoUrl" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getPhotoUrl()} : '')" required placeholder="Enter photo url">
+      </div>
       <hr>
       <th:block th:if="${hasError}">
         <div th:text="${error}" class="text-danger"></div>
       </th:block>
-      <button id="submit" class="btn btn-dark btn-block" type="submit">Add landmark</button>
+      <button id="submit" class="btn btn-dark btn-block" type="submit">Submit</button>
       <a href="/map/edit-list" class="btn btn-block btn-light">Back</a>
     </form>
   </div>

@@ -19,7 +19,6 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
 
     public ReviewServiceImpl(HistoricLandmarkRepository historicLandmarkRepository,
-                             UserRepository userRepository,
                              ReviewRepository reviewRepository) {
         this.historicLandmarkRepository = historicLandmarkRepository;
         this.reviewRepository = reviewRepository;
@@ -28,7 +27,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public Review addReview(HistoricLandmark landmark, User user, String comment, Double rating) {
         Review review = new Review(user, comment, rating, LocalDateTime.now());
-
         reviewRepository.save(review);
 
         landmark.getReviews().add(review);

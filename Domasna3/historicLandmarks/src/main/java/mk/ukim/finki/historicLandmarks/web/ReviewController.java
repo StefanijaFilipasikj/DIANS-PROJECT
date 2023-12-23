@@ -1,13 +1,15 @@
 package mk.ukim.finki.historicLandmarks.web;
 
-import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
 import mk.ukim.finki.historicLandmarks.model.Review;
 import mk.ukim.finki.historicLandmarks.model.User;
+import mk.ukim.finki.historicLandmarks.model.exception.InvalidArgumentsException;
+import mk.ukim.finki.historicLandmarks.service.AuthService;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import mk.ukim.finki.historicLandmarks.service.ReviewService;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +22,12 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final HistoricLandmarkService historicLandmarkService;
+    private final AuthService authService;
 
-    public ReviewController(ReviewService reviewService, HistoricLandmarkService historicLandmarkService) {
+    public ReviewController(ReviewService reviewService, HistoricLandmarkService historicLandmarkService, AuthService authService) {
         this.reviewService = reviewService;
         this.historicLandmarkService = historicLandmarkService;
+        this.authService = authService;
     }
 
     @PostMapping("/add-review/{id}")
@@ -31,9 +35,12 @@ public class ReviewController {
     public ResponseEntity<Map<String, String>> addReviewToLandmark(@PathVariable Long id,
                                                                    @RequestParam String comment,
                                                                    @RequestParam Double rating,
-                                                                   HttpServletRequest request){
-        HistoricLandmark landmark = historicLandmarkService.findById(id).orElse(null);
-        User user = (User)request.getSession().getAttribute("user");
+                                                                   Authentication authentication){
+        HistoricLandmark landmark = historicLandmarkService.findById(id).orElseThrow(InvalidArgumentsException::new);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        User user = this.authService.findByUsername(username);
+
 
         if (landmark != null && user != null) {
             Review rev = reviewService.addReview(landmark, user, comment, rating);
@@ -60,7 +67,7 @@ public class ReviewController {
                                                           @RequestParam String editComment,
                                                           @RequestParam Double editRating){
         Review review = reviewService.findById(id);
-        HistoricLandmark landmark = historicLandmarkService.findById(landmarkId ).orElse(null);
+        HistoricLandmark landmark = historicLandmarkService.findById(landmarkId).orElseThrow(InvalidArgumentsException::new);
         User user = review.getUser();
 
         if(editComment != null){
@@ -86,7 +93,7 @@ public class ReviewController {
     @ResponseBody
     public ResponseEntity<Map<String, String>> deleteReview(@PathVariable Long id,
                                                             @PathVariable Long landmarkId){
-        HistoricLandmark landmark = historicLandmarkService.findById(landmarkId ).orElse(null);
+        HistoricLandmark landmark = historicLandmarkService.findById(landmarkId ).orElseThrow(InvalidArgumentsException::new);
         if(landmark != null){
             this.reviewService.deleteById(id, landmarkId);
             Map<String, String> map = new HashMap<>();

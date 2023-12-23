@@ -2,6 +2,13 @@
     <div class="container mb-4">
         <form class="form-signin mt-xl-5" method="post" action="/register">
             <h2 class="form-signin-heading">Register</h2>
+            <hr/>
+            <th:block th:if="${hasError}">
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <strong>Error! </strong>
+                    <th:block th:text="${error}"></th:block>
+                </div>
+            </th:block>
             <p>
                 <label for="username" class="sr-only">Username</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
@@ -24,11 +31,8 @@
             </p>
             <p>
                 <label for="photoUrl" class="sr-only">Photo Url</label>
-                <input type="text" id="photoUrl" name="photoUrl" class="form-control" placeholder="Photo Url" required="" autofocus="">
+                <input type="text" id="photoUrl" name="photoUrl" class="form-control" placeholder="Photo Url">
             </p>
-            <th:block th:if="${hasError}">
-                <div th:text="${error}" class="text-danger"></div>
-            </th:block>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         </form>

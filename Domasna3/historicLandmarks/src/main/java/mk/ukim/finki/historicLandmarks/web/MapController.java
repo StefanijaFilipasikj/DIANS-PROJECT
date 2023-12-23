@@ -1,35 +1,24 @@
 package mk.ukim.finki.historicLandmarks.web;
 
-import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
-import mk.ukim.finki.historicLandmarks.model.Review;
-import mk.ukim.finki.historicLandmarks.model.User;
-import mk.ukim.finki.historicLandmarks.model.enumerations.UserRoles;
-import mk.ukim.finki.historicLandmarks.repository.UserRepository;
+import mk.ukim.finki.historicLandmarks.model.enumerations.Role;
 import mk.ukim.finki.historicLandmarks.service.AuthService;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
-import mk.ukim.finki.historicLandmarks.service.ReviewService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/map")
 public class MapController {
     private final HistoricLandmarkService historicLandmarkService;
-    private final ReviewService reviewService;
     private final AuthService authService;
 
-    public MapController(HistoricLandmarkService historicLandmarkService, ReviewService reviewService, UserRepository userRepository, AuthService authService) {
+    public MapController(HistoricLandmarkService historicLandmarkService, AuthService authService) {
         this.historicLandmarkService = historicLandmarkService;
-        this.reviewService = reviewService;
         this.authService = authService;
     }
 
@@ -37,8 +26,9 @@ public class MapController {
     public String getPage(@RequestParam(required = false) String text,
                           @RequestParam(required = false) String region,
                           @RequestParam(required = false) String historicClass,
-                          Model model, HttpServletRequest req){
+                          Model model){
         List<HistoricLandmark> landmarks = historicLandmarkService.findAll();
+
         if(text != null && !text.equals("")){
             landmarks = historicLandmarkService.searchByName(text);
         }
@@ -56,8 +46,7 @@ public class MapController {
             model.addAttribute("hasAny", true);
         }
         model.addAttribute("landmarks", landmarks);
-        model.addAttribute("user", req.getSession().getAttribute("user"));
-        model.addAttribute("admin", UserRoles.ADMIN);
+        model.addAttribute("admin", Role.ROLE_ADMIN);
         model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
         model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
         model.addAttribute("bodyContent", "map-page");
@@ -65,13 +54,13 @@ public class MapController {
     }
 
     @GetMapping("/random")
-    public String getRandom(Model model, HttpServletRequest req){
+    public String getRandom(Model model){
         List<HistoricLandmark> landmarks = new ArrayList<>();
+
         landmarks.add(this.historicLandmarkService.findRandomLandmark());
         model.addAttribute("landmarks", landmarks);
         model.addAttribute("hasAny", true);
-        model.addAttribute("adminRole", UserRoles.USER);
-        model.addAttribute("user", req.getSession().getAttribute("user"));
+        model.addAttribute("adminRole", Role.ROLE_USER);
         model.addAttribute("regions", historicLandmarkService.findAllRegions().stream());
         model.addAttribute("historicClasses", historicLandmarkService.findAllHistoricClass());
         model.addAttribute("bodyContent", "map-page");
@@ -83,7 +72,7 @@ public class MapController {
                                   @RequestParam(required = false) String text,
                                   @RequestParam(required = false) String region,
                                   @RequestParam(required = false) String historicClass,
-                                  Model model, HttpServletRequest req){
+                                  Model model){
         List<HistoricLandmark> landmarks = historicLandmarkService.findAll();
         if (error!=null && !error.isEmpty()){
             model.addAttribute("hasError",true);
@@ -158,7 +147,6 @@ public class MapController {
     @GetMapping("/delete-landmark/{id}")
     public String deleteLandmark(@PathVariable Long id,Model model){
         historicLandmarkService.delete(id);
-        model.addAttribute("bodyContent","edit-list");
-        return "master-template";
+        return "redirect:/map/edit-list";
     }
 }

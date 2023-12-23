@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/login")
@@ -21,7 +22,11 @@ public class LoginController {
     }
 
     @GetMapping
-    public String getLoginPage(Model model) {
+    public String getLoginPage(Model model, @RequestParam(required = false) String error) {
+        if(error != null && !error.isEmpty()){
+            model.addAttribute("hasError", true);
+            model.addAttribute("error", error);
+        }
         model.addAttribute("bodyContent", "login");
         return "master-template";
     }
@@ -29,17 +34,11 @@ public class LoginController {
     @PostMapping
     public String login(HttpServletRequest request, Model model) {
         User user = null;
-
         try {
-            user = authService.login(request.getParameter("username"), request.getParameter("password"));
-        } catch (InvalidUserCredentialsException | InvalidArgumentsException exception) {
-            model.addAttribute("bodyContent", "login");
-            model.addAttribute("hasError", true);
-            model.addAttribute("error", exception.getMessage());
-            return "master-template";
+            user = this.authService.login(request.getParameter("username"), request.getParameter("password"));
+        } catch (Exception exception) {
+            return "redirect:/login?error=" + exception.getMessage();
         }
-
-        request.getSession().setAttribute("user", user);
         return "redirect:/home";
     }
 }

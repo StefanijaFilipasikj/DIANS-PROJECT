@@ -1,9 +1,10 @@
-<section class="text-center p-5">
+<section class="text-center p-5" id="homePage">
   <div class="container">
     <h1 class="jumbotron-heading">Visit one of the Top 10 Historic landmarks in North Macedonia</h1>
     <br/>
     <div class="carousel">
       <div th:each="landmark : ${top10Landmarks}"
+           th:url="${landmark.getPhotoUrl()}"
            th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 40em; width: 100%; background-size: cover; background-position: center;'">
       </div>
     </div>

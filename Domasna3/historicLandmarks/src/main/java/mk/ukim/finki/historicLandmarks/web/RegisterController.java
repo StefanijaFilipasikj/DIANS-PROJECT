@@ -3,7 +3,7 @@ package mk.ukim.finki.historicLandmarks.web;
 
 import mk.ukim.finki.historicLandmarks.model.exception.InvalidArgumentsException;
 import mk.ukim.finki.historicLandmarks.model.exception.PasswordsDoNotMatchException;
-import mk.ukim.finki.historicLandmarks.service.AuthService;
+import mk.ukim.finki.historicLandmarks.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/register")
 public class RegisterController {
 
-    private final AuthService authService;
+    private final UserService userService;
 
-    public RegisterController(AuthService authService) {
-        this.authService = authService;
+    public RegisterController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
@@ -40,9 +40,9 @@ public class RegisterController {
                            @RequestParam String surname,
                            @RequestParam String photoUrl) {
         try{
-            this.authService.register(username, password, repeatedPassword, name, surname, photoUrl);
+            this.userService.register(username, password, repeatedPassword, name, surname, photoUrl);
             return "redirect:/login";
-        } catch (InvalidArgumentsException | PasswordsDoNotMatchException exception) {
+        } catch (Exception exception) {
             return "redirect:/register?error=" + exception.getMessage();
         }
     }
