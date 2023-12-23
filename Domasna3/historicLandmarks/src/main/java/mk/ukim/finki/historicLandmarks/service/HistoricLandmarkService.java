@@ -23,4 +23,6 @@ public interface HistoricLandmarkService {
     void delete(Long id);
     List<HistoricLandmark> findTop10();
     HistoricLandmark findRandomLandmark();
+
+    boolean empty();
 }

@@ -21,12 +21,19 @@ jQuery(function($) {
     $('#edit-landmark-table').DataTable();
 });
 
+document.querySelectorAll(".carousel>div").forEach(e => console.log(e.getAttribute('url')))
+
+
 let reviewForms = document.querySelectorAll(".review-form");
 reviewForms.forEach(formDiv => {
     const form = formDiv.querySelector("form");
     form.addEventListener("submit", function(event) {
         event.preventDefault();
         const formData = new FormData(this);
+
+        formData.forEach(elem => console.log(elem));
+        console.log(this.action)
+        console.log(this.method)
 
         fetch(this.action, {
             method: this.method,
@@ -41,6 +48,9 @@ reviewForms.forEach(formDiv => {
             })
             .then(data => {
                 if (data !== " ") {
+
+                    console.log(data);
+
                     const reviewDisplay = createCommentElement(data);
                     reviewDisplay.style.borderBottom = "1px solid rgb(230 230 230)";
                     reviewDisplay.style.paddingBottom = "10px";
@@ -81,9 +91,10 @@ function createCommentElement(review) {
 
     const userPhotoDiv = document.createElement("div");
     userPhotoDiv.classList.add("user-photo");
-    userPhotoDiv.setAttribute("style", "background-size:cover; height: 40px; width: 40px; border-radius: 50%; margin-right: 8px");
-    userPhotoDiv.style.backgroundImage = "url('" + review.photoUrl + "')";
-
+    userPhotoDiv.setAttribute("style", "background-size:cover; height: 40px; width: 40px; border-radius: 50%; margin-right: 8px; background-color: rgb(230 230 230");
+    if(review.photoUrl != null) {
+        userPhotoDiv.style.backgroundImage = "url('" + review.photoUrl + "')";
+    }
     const commentTextDiv = document.createElement("div");
     commentTextDiv.style.flex = "1";
 
@@ -404,8 +415,14 @@ function getLocations(){
     // list1.forEach(l=>console.log(names[l[1]]));
 
     let list2 = []
-    let i= 0;
+    let i= -1;
     let routeInterval = setInterval(function() {
+        i+=1;
+        progressBar.style.width = (i+1)*10 + "%";
+        if(i===10){
+            i=-1
+            clearInterval(routeInterval);
+        }
         console.log(names[list1[i][1]])
         let routeControl = L.Routing.control({
             waypoints: [
@@ -413,7 +430,7 @@ function getLocations(){
                 landmarks[list1[i][1]]
             ],
             lineOptions: {
-                styles: []  // Set styles to an empty array to hide the path
+                styles: [{opacity: 0, className: 'invisible-line'}]  // Set styles to an empty array to hide the path
             },
             fitSelectedRoutes: false,
             instructions: false,
@@ -425,19 +442,16 @@ function getLocations(){
                 });
             }
         }).addTo(map);
+        routeControl.getRouter().options.show = false;
 
         routeControl.on('routesfound', function(e) {
             var routes = e.routes;
             var summary = routes[0].summary;
             let distance = summary.totalDistance / 1000;
-            list2.push([distance, list1[i-1][1]])
+            list2.push([distance, list1[i][1]])
             // routeControl.getWaypoints().spliceWaypoints(0, 1);
             // control.route();
         });
-        progressBar.style.width = (i+1)*10 + "%";
-        i+=1;
-        if(i===10)
-            clearInterval(routeInterval);
     }, 600);
 
     setTimeout(function() {

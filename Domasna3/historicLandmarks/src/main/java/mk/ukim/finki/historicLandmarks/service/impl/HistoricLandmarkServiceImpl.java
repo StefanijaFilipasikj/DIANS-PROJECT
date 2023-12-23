@@ -144,4 +144,9 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
         int index = random.nextInt((int)this.historicLandmarkRepository.count());
         return this.historicLandmarkRepository.findAll().get(index);
     }
+
+    @Override
+    public boolean empty() {
+        return this.historicLandmarkRepository.count() == 0;
+    }
 }

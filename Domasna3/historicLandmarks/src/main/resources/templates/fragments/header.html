@@ -21,21 +21,28 @@
                 </ul>
 
                 <ul class="navbar-nav navbar-right">
-                    <li th:if="${session.user == null}" class="nav-item" id="nav-register">
-                        <a class="btn btn-light btn-sm mr-3 user-button" href="/register">
-                            <i class="fa fa-user-plus"></i> Register
-                        </a>
-                    </li>
-                    <li th:if="${session.user == null}" class="nav-item">
-                        <a class="btn btn-light btn-sm user-button" href="/login">
-                            <i class="fa fa-user"></i> Login
-                        </a>
-                    </li>
-                    <li th:if="${session.user != null}" class="nav-item">
-                        <a class="btn btn-light btn-sm user-button" href="/logout">
-                            <i class="fa fa-user-times"></i> Logout
-                        </a>
-                    </li>
+                    <th:block sec:authorize="not isAuthenticated()">
+                        <li class="nav-item" id="nav-register">
+                            <a class="btn btn-light btn-sm mr-3 user-button" href="/register">
+                                <i class="fa fa-user-plus"></i> Register
+                            </a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="not isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="btn btn-light btn-sm user-button" href="/login">
+                                <i class="fa fa-user"></i> Login
+                            </a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="btn btn-light btn-sm user-button" href="/logout">
+                                <i class="fa fa-user-times"></i> Logout
+                            </a>
+                        </li>
+                    </th:block>
+
                 </ul>
             </div>
         </div>
