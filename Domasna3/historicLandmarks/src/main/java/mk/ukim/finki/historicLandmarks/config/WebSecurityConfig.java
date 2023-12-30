@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity
 public class WebSecurityConfig {
     private final CustomUsernamePasswordAuthenticationProvider authProvider;
 
@@ -28,14 +28,14 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/h2-console/**").authenticated()
-                        .requestMatchers("/map/edit-list", "/map/add-landmark", "/map/add", "/map/add-landmark/**", "/map/delete-landmark/**").hasRole("ADMIN")
+                        .requestMatchers("/map/edit-list", "/map/add-landmark", "/map/add", "/map/add-landmark/**", "/map/delete-landmark/**", "/database/**").hasRole("ADMIN")
                         .requestMatchers("/review/**").hasRole("USER")
                         .requestMatchers("/**").permitAll()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
-                        .failureUrl("/login?error=BadCredentials")
+                        .failureUrl("/login?error=Username%20or%20password%20not%20valid")
                         .defaultSuccessUrl("/", true)
                 )
                 .logout((logout) -> logout

@@ -1,8 +1,6 @@
 package mk.ukim.finki.historicLandmarks.web;
 
-
-import mk.ukim.finki.historicLandmarks.model.exception.InvalidArgumentsException;
-import mk.ukim.finki.historicLandmarks.model.exception.PasswordsDoNotMatchException;
+import mk.ukim.finki.historicLandmarks.model.enumerations.Role;
 import mk.ukim.finki.historicLandmarks.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +25,6 @@ public class RegisterController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-
         model.addAttribute("bodyContent", "register");
         return "master-template";
     }
@@ -40,7 +37,7 @@ public class RegisterController {
                            @RequestParam String surname,
                            @RequestParam String photoUrl) {
         try{
-            this.userService.register(username, password, repeatedPassword, name, surname, photoUrl);
+            this.userService.register(username, password, repeatedPassword, name, surname, photoUrl, Role.ROLE_USER);
             return "redirect:/login";
         } catch (Exception exception) {
             return "redirect:/register?error=" + exception.getMessage();

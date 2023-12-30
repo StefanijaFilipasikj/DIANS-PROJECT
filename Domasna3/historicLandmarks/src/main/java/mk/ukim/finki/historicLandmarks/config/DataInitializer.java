@@ -1,30 +1,22 @@
 package mk.ukim.finki.historicLandmarks.config;
 
 import jakarta.annotation.PostConstruct;
-import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
-import mk.ukim.finki.historicLandmarks.service.UserService;
+import mk.ukim.finki.historicLandmarks.service.DataService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataInitializer {
+    private final DataService dataService;
 
-    private final UserService userService;
-    private final HistoricLandmarkService historicLandmarkService;
-
-    public DataInitializer(UserService userService, HistoricLandmarkService historicLandmarkService) {
-        this.userService = userService;
-        this.historicLandmarkService = historicLandmarkService;
+    public DataInitializer(DataService dataService) {
+        this.dataService = dataService;
     }
 
     @PostConstruct
     public void initData() {
-        if(this.historicLandmarkService.empty()){
-            this.historicLandmarkService.deleteAllData();
-            this.historicLandmarkService.saveData();
-        }
-        if(this.userService.empty()){
-            this.userService.deleteAllData();
-            this.userService.addInitialData();
+        if(this.dataService.isEmpty()){
+            this.dataService.deleteAllData();
+            this.dataService.addInitialData();
         }
     }
 }

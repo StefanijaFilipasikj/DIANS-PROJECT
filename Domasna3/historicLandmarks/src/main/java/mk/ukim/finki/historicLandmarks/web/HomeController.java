@@ -17,7 +17,7 @@ public class HomeController {
 
     @GetMapping
     private String getPage(Model model){
-        model.addAttribute("top10Landmarks", this.historicLandmarkService.findTop10());
+        model.addAttribute("top10Landmarks", this.historicLandmarkService.findTop10Landmarks());
         model.addAttribute("bodyContent", "home");
         return "master-template";
     }

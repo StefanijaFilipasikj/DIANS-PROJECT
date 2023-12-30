@@ -2,72 +2,34 @@ package mk.ukim.finki.historicLandmarks.service.impl;
 
 
 import mk.ukim.finki.historicLandmarks.model.HistoricLandmark;
-import mk.ukim.finki.historicLandmarks.model.Review;
-import mk.ukim.finki.historicLandmarks.model.User;
+import mk.ukim.finki.historicLandmarks.model.exception.InvalidInputsException;
+import mk.ukim.finki.historicLandmarks.model.exception.InvalidLandmarkIdException;
 import mk.ukim.finki.historicLandmarks.repository.HistoricLandmarkRepository;
 import mk.ukim.finki.historicLandmarks.service.HistoricLandmarkService;
 import org.springframework.stereotype.Service;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.net.URI;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
 
     private final HistoricLandmarkRepository historicLandmarkRepository;
-    private static Random random = new Random();
+    private final static Random random = new Random();
 
     public HistoricLandmarkServiceImpl(HistoricLandmarkRepository historicLandmarkRepository) {
         this.historicLandmarkRepository = historicLandmarkRepository;
     }
-
     @Override
-    public void saveData(){
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/filteredData.csv"));
-            String line;
-            String header = br.readLine(); //skip header
-            while ((line = br.readLine())!=null){
-                String [] data = line.split(",",-1);
-                if (data.length == 7){
-                    HistoricLandmark hl = new HistoricLandmark();
-                    hl.setLat(Double.parseDouble(data[0]));
-                    hl.setLon(Double.parseDouble(data[1]));
-                    hl.setHistoricClass(data[2]);
-                    hl.setName(data[3]);
-                    hl.setAddress(data[4]);
-                    hl.setRegion(data[5]);
-                    hl.setPhotoUrl(data[6]);
-                    historicLandmarkRepository.save(hl);
-                }
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+    public List<HistoricLandmark> findAllLandmarks() {
+        return historicLandmarkRepository.findAll().stream()
+                .sorted(Comparator.comparing(HistoricLandmark::getRating).reversed())
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void deleteAllData() {
-        historicLandmarkRepository.deleteAll();
-    }
-
-    @Override
-    public List<HistoricLandmark> findAll() {
-        return historicLandmarkRepository.findAll().stream().sorted().toList();
-    }
-
-    @Override
-    public Optional<HistoricLandmark> findById(Long id) {
-        return historicLandmarkRepository.findById(id);
+    public HistoricLandmark findLandmarkById(Long id) {
+        return historicLandmarkRepository.findById(id).orElseThrow(InvalidLandmarkIdException::new);
     }
 
     @Override
@@ -76,64 +38,73 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     }
 
     @Override
-    public List<String> findAllHistoricClass() {
-        List<String> a = historicLandmarkRepository.findAll().stream()
+    public List<String> findAllHistoricClassesCapitalizedAndSorted() {
+        return historicLandmarkRepository.findAll().stream()
+                .map(HistoricLandmark::getHistoricClass)
+                .distinct()
+                .map(elem -> Arrays.stream(elem.split("_"))
+                        .map(part -> part.substring(0, 1).toUpperCase() + part.substring(1))
+                        .collect(Collectors.joining(" "))
+                )
+                .sorted()
+                .toList();
+    }
+
+    @Override
+    public List<String> findAllHistoricClassesRaw() {
+        return  this.historicLandmarkRepository.findAll().stream()
                 .map(HistoricLandmark::getHistoricClass)
                 .distinct().toList();
-        return capitalize(a);
     }
 
     @Override
-    public List<String> findAllHistoricClassRaw() {
-        List<String> a = historicLandmarkRepository.findAll().stream()
-                .map(HistoricLandmark::getHistoricClass)
-                .distinct().toList();
-        return a;
+    public void addNewLandmark(String name, String landmarkClass, Double lat, Double lon, String region, String address, String photoUrl){
+        checkInputs(photoUrl, lat, lon);
+        this.historicLandmarkRepository.save(new HistoricLandmark(lat,lon,landmarkClass,name,address,region,photoUrl));
     }
 
     @Override
-    public List<String> capitalize(List<String> list) {
-        return list.stream().map(elem -> {
-            String[] parts = elem.split("_");
-            for (int i = 0; i < parts.length; i++) {
-                parts[i] = parts[i].substring(0, 1).toUpperCase() + parts[i].substring(1);
-            }
-            return String.join(" ", parts);
-        }).sorted().toList();
+    public void editLandmarkById(Long landmarkId, String name, String landmarkClass, Double lat, Double lon, String region, String address, String photoUrl){
+        HistoricLandmark landmark = this.historicLandmarkRepository.findById(landmarkId).orElseThrow(InvalidLandmarkIdException::new);
+        checkInputs(photoUrl, lat, lon);
+
+        landmark.setName(name);
+        landmark.setHistoricClass(landmarkClass);
+        landmark.setLon(lon);
+        landmark.setLat(lat);
+        landmark.setAddress(address);
+        landmark.setRegion(region);
+        landmark.setPhotoUrl(photoUrl);
+        this.historicLandmarkRepository.save(landmark);
     }
 
-    @Override
-    public String removeCapitalize(String s) {
-        String[] parts = s.split(" ");
-        for (int i = 0; i < parts.length; i++) {
-            parts[i] = parts[i].substring(0, 1).toLowerCase() + parts[i].substring(1);
+    private void checkInputs(String urlString, Double lat, Double lon){
+        boolean invalidUrl = false;
+        try{
+            URI.create(urlString).toURL();
+        }catch (Exception exception){
+            invalidUrl = true;
         }
-        return String.join("_", parts);
+
+        if(invalidUrl && (lon < -180.0 || lon > 180.0) && (lat < -90.0 || lat > 90.0))
+            throw new InvalidInputsException("Longitude must be between -180 and 180, Latitude must be between -90 and 90, Invalid URL");
+        else if((lon < -180.0 || lon > 180.0) && (lat < -90.0 || lat > 90.0))
+            throw new InvalidInputsException("Longitude must be between -180 and 180, Latitude must be between -90 and 90");
+        else if(lon < -180.0 || lon > 180.0)
+            throw new InvalidInputsException("Longitude must be between -180 and 180");
+        else if(lat < -90.0 || lat > 90.0)
+            throw new InvalidInputsException("Latitude must be between -90 and 90");
+        else if(invalidUrl)
+            throw  new InvalidInputsException("Invalid URL");
     }
 
     @Override
-    public List<HistoricLandmark> searchByName(String text) {
-        return historicLandmarkRepository.findAll().stream().filter(h -> h.getName().toLowerCase()
-                .contains(text.toLowerCase())).sorted().toList();
-    }
-
-    @Override
-    public Optional<HistoricLandmark> edit(String landmarkId, String name, String landmarkClass, String lat, String lon, String region, String address, String photoUrl) {
-        return historicLandmarkRepository.editLandmarkById(landmarkId,name,landmarkClass,lat,lon,address,region,photoUrl);
-    }
-
-    @Override
-    public Optional<HistoricLandmark> save(String lat, String lon, String landmarkClass, String name, String address, String region, String photoUrl) {
-        return Optional.of(historicLandmarkRepository.save(new HistoricLandmark(Double.parseDouble(lat),Double.parseDouble(lon),landmarkClass,name,address,region,photoUrl)));
-    }
-
-    @Override
-    public void delete(Long id) {
+    public void deleteLandmarkById(Long id) {
         historicLandmarkRepository.deleteById(id);
     }
 
     @Override
-    public List<HistoricLandmark> findTop10() {
+    public List<HistoricLandmark> findTop10Landmarks() {
         return this.historicLandmarkRepository.findAll().stream()
                 .sorted(Comparator.comparing(HistoricLandmark::getRating).reversed())
                 .limit(10).collect(Collectors.toList());
@@ -145,8 +116,34 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
         return this.historicLandmarkRepository.findAll().get(index);
     }
 
+    /**
+     * A method that filters HistoricLandmarks by three parameters
+     * @param text - substring of HistoricLandmark.Name
+     * @param region - HistoricLandmark.Region
+     * @param historicClass - HistoricLandmark.HistoricClass
+     * @return A list of HistoricLandmarks filtered by the parameters that aren't null
+     */
     @Override
-    public boolean empty() {
-        return this.historicLandmarkRepository.count() == 0;
+    public List<HistoricLandmark> filterBy(String text, String region, String historicClass) {
+
+        if(historicClass != null) historicClass = historicClass.replace(" ", "_");
+
+        if(text != null && !text.isEmpty() && region != null && !region.isEmpty() && historicClass != null && !historicClass.isEmpty()){
+            return this.historicLandmarkRepository.findByNameContainingIgnoreCaseAndRegionIgnoreCaseAndHistoricClassIgnoreCase(text, region, historicClass);
+        }else if(text != null && !text.isEmpty() && region != null && !region.isEmpty()){
+            return this.historicLandmarkRepository.findByNameContainingIgnoreCaseAndRegionIgnoreCase(text, region);
+        }else if(text != null && !text.isEmpty() && historicClass != null && !historicClass.isEmpty()){
+            return this.historicLandmarkRepository.findByNameContainingIgnoreCaseAndHistoricClassIgnoreCase(text, historicClass);
+        }else if(region != null && !region.isEmpty() && historicClass != null && !historicClass.isEmpty()){
+            return this.historicLandmarkRepository.findByRegionIgnoreCaseAndHistoricClassIgnoreCase(region, historicClass);
+        } else if(text != null && !text.isEmpty()){
+            return this.historicLandmarkRepository.findByNameContainingIgnoreCase(text);
+        }else if(region != null && !region.isEmpty()){
+            return this.historicLandmarkRepository.findByRegionIgnoreCase(region);
+        }else if(historicClass != null && !historicClass.isEmpty()){
+            return this.historicLandmarkRepository.findByHistoricClassIgnoreCase(historicClass);
+        }else{
+            return this.historicLandmarkRepository.findAll();
+        }
     }
 }
