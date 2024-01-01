@@ -3,12 +3,10 @@
         <form class="form-signin mt-xl-5" method="post" action="/login">
             <h2 class="form-signin-heading">Log in</h2>
             <hr/>
-            <th:block th:if="${hasError}">
-                <div class="alert alert-danger alert-dismissible fade show">
-                    <strong>Error! </strong>
-                    <th:block th:text="${error}"></th:block>
-                </div>
-            </th:block>
+            <div th:if="${hasError}" class="alert alert-danger alert-dismissible fade show">
+                <strong>Error! </strong>
+                <th:block th:text="${error}"></th:block>
+            </div>
             <p>
                 <label for="username" class="sr-only">Username</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Username"

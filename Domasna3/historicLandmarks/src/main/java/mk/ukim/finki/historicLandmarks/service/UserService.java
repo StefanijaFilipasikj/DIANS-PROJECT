@@ -1,11 +1,13 @@
 package mk.ukim.finki.historicLandmarks.service;
 
 import mk.ukim.finki.historicLandmarks.model.User;
+import mk.ukim.finki.historicLandmarks.model.enumerations.Role;
 import org.springframework.security.core.userdetails.UserDetailsService;
-public interface UserService extends UserDetailsService {
-    User register(String username, String password, String repeatPassword, String name, String surname, String photoUrl);
-    void deleteAllData();
-    void addInitialData();
 
-    boolean empty();
+import java.util.List;
+
+public interface UserService extends UserDetailsService {
+    List<User> findAllUsers();
+    User findUserByUsername(String username);
+    void register(String username, String password, String repeatPassword, String name, String surname, String photoUrl, Role role);
 }

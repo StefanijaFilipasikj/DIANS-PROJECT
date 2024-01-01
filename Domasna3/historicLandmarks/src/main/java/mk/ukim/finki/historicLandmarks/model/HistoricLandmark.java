@@ -3,6 +3,7 @@ package mk.ukim.finki.historicLandmarks.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,22 +11,22 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "Historic_Landmarks")
-public class HistoricLandmark implements Comparable<HistoricLandmark>{
+public class HistoricLandmark{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double lat;
-    private double lon;
+    private Double lat;
+    private Double lon;
     private String historicClass;
     private String name;
     private String address;
     private String region;
-    @Lob //Large Object
+    @Lob
     private String photoUrl;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Review> reviews;
 
-    public HistoricLandmark(double lat, double lon, String historicClass, String name, String address, String region, String photoUrl) {
+    public HistoricLandmark(Double lat, Double lon, String historicClass, String name, String address, String region, String photoUrl) {
         this.lat = lat;
         this.lon = lon;
         this.historicClass = historicClass;
@@ -34,11 +35,6 @@ public class HistoricLandmark implements Comparable<HistoricLandmark>{
         this.region = region;
         this.photoUrl = photoUrl;
         this.reviews = new ArrayList<>();
-    }
-
-    @Override
-    public int compareTo(HistoricLandmark o) {
-        return name.compareTo(o.getName());
     }
 
     public Double getRating(){

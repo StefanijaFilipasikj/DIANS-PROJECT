@@ -30,13 +30,13 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired =  true;
     private boolean isEnabled = true;
 
-    public User(String username, String password, String name, String surname, String photoUrl) {
+    public User(String username, String password, String name, String surname, String photoUrl, Role role) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.photoUrl = photoUrl;
-        this.role = Role.ROLE_USER;
+        this.role = role;
     }
 
     @Override

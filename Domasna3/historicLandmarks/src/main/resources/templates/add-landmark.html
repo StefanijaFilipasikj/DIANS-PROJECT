@@ -1,12 +1,18 @@
 <section>
   <div class="container mt-5">
     <h2 class="jumbotron-heading text-center" th:text="${add != null} ? 'Add landmark' : 'Edit landmark - ' + ${landmark.getName()}"></h2>
+    <hr/>
+    <div th:if="${hasError}" class="alert alert-danger alert-dismissible fade show">
+      <strong>Error! </strong>
+      <th:block th:text="${error}"></th:block>
+    </div>
     <form class="form-signin mt-2" method="post" action="/map/add">
+      <label for="landmarkId" class="noDisplay"></label>
+      <input id="landmarkId" hidden name="landmarkId" th:value="(${landmark!=null} ? ${landmark.getId()} : '')">
       <div class="form-group">
         <label for="name">Landmark name</label>
         <input id="name" name="name" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getName()} : '')" required placeholder="Enter name">
       </div>
-      <input hidden name="landmarkId" th:value="(${landmark!=null} ? ${landmark.getId()} : '')">
       <div class="form-group">
         <label for="landmarkClass">Landmark class</label>
         <select id="landmarkClass" name="landmarkClass" class="form-control">
@@ -37,16 +43,10 @@
         <input id="address" name="address" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getAddress()} : '')" required placeholder="Enter address">
       </div>
       <div class="form-group">
-        <label for="photoUrl">Landmark address</label>
-        <input id="photoUrl" name="photoUrl" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getPhotoUrl()} : '')" required placeholder="Enter photo url">
+        <label for="photoUrl">Photo url</label>
+        <input id="photoUrl" name="photoUrl" type="text" class="form-control" th:value="(${landmark!=null} ? ${landmark.getPhotoUrl()} : '')" placeholder="Enter photo url">
       </div>
       <hr>
-      <th:block th:if="${hasError}">
-        <div class="alert alert-danger alert-dismissible fade show">
-          <strong>Error! </strong>
-          <th:block th:text="${error}"></th:block>
-        </div>
-      </th:block>
       <button id="submit" class="btn btn-dark btn-block" type="submit">Submit</button>
       <a href="/map/edit-list" class="btn btn-block btn-light">Back</a>
     </form>
