@@ -1,0 +1,25 @@
+<section class="text-center">
+    <div class="container">
+        <form class="form-signin mt-xl-5" method="post" action="/login">
+            <h2 class="form-signin-heading">Log in</h2>
+            <hr/>
+            <div th:if="${hasError}" class="alert alert-danger alert-dismissible fade show">
+                <strong>Error! </strong>
+                <th:block th:text="${error}"></th:block>
+            </div>
+            <p>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+                       required="" autofocus="">
+            </p>
+            <p>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                       required="" autofocus="">
+            </p>
+
+            <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+        </form>
+        <a href="/register" class="btn btn-lg btn-block btn-light">Don't have an account yet? Register here</a>
+    </div>
+</section>

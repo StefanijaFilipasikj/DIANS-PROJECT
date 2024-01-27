@@ -1,0 +1,26 @@
+<section class="text-center p-5" id="homePage">
+  <div class="container">
+    <h1 class="jumbotron-heading">Visit one of the Top 10 Historic landmarks in North Macedonia</h1>
+    <br/>
+    <div class="carousel">
+      <div
+        th:each="landmark : ${top10Landmarks}"
+        th:url="${landmark.getPhotoUrl()}"
+        th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 40em; width: 100%; background-size: cover; background-position: center;'"
+      ></div>
+    </div>
+  </div>
+  <span class="horizontalLine"></span>
+  <div class="randomLandmark container">
+    <h1 class="jumbotron-heading">Or let us decide where you should go next</h1>
+    <br/>
+    <a href="/map/random" class="btn btn-primary btn-lg text-white rounded">
+      Go to a surprising place
+    </a>
+  </div>
+  <span class="horizontalLine"></span>
+  <div class="container">
+    <h1 class="jumbotron-heading">Have Fun!</h1>
+    <h3 class="jumbotron-heading">And let us know how it all went</h3>
+  </div>
+</section>

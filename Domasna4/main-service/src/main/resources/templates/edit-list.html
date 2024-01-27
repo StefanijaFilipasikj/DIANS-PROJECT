@@ -1,0 +1,47 @@
+  <section class="p-5 m-3">
+    <div class="table-container table-responsive">
+      <table id="edit-landmark-table" class="table table-striped w-100">
+        <thead>
+        <tr>
+          <th scope="col">Lon</th>
+          <th scope="col">Lat</th>
+          <th scope="col">Name</th>
+          <th scope="col">Class</th>
+          <th scope="col">Region</th>
+          <th scope="col">Address</th>
+          <th scope="col"> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="landmark : ${landmarks}">
+          <td th:text="${landmark.getLon()}"></td>
+          <td th:text="${landmark.getLat()}"></td>
+          <td th:text="${landmark.getName()}"></td>
+          <td th:text="${landmark.getHistoricClass()}"></td>
+          <td th:text="${landmark.getRegion()}"></td>
+          <td th:text="${landmark.getAddress()}"></td>
+          <td>
+            <div class="buttons">
+              <a th:href="@{'/map/add-landmark/{id}' (id=${landmark.getId()}) }" class="btn btn-sm btn-success"><i class="fa fa-edit">Edit</i></a>
+              <a th:href="@{'/map/delete-landmark/{id}' (id=${landmark.getId()}) }" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <div th:if="${hasError}" class="alert alert-danger alert-dismissible fade show">
+      <strong>Error! </strong>
+      <th:block th:text="${error}"></th:block>
+    </div>
+    <div class="col mb-3">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <a href="/map/add-landmark" class="btn btn-block btn-dark">
+            Add new historical landmark
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
