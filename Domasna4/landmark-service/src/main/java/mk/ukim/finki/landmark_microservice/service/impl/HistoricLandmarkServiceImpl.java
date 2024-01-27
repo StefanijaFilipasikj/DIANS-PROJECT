@@ -1,15 +1,18 @@
 package mk.ukim.finki.landmark_microservice.service.impl;
 
 
+import jakarta.persistence.Lob;
 import mk.ukim.finki.landmark_microservice.model.HistoricLandmark;
 import mk.ukim.finki.landmark_microservice.model.Review;
 import mk.ukim.finki.landmark_microservice.model.exception.InvalidInputsException;
 import mk.ukim.finki.landmark_microservice.model.exception.InvalidLandmarkIdException;
 import mk.ukim.finki.landmark_microservice.repository.HistoricLandmarkRepository;
 import mk.ukim.finki.landmark_microservice.service.HistoricLandmarkService;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -121,35 +124,42 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     }
 
     /**
-     * A method that filters HistoricLandmarks by three parameters
+     * A method that filters HistoricLandmarks by parameters
      * @param text - substring of HistoricLandmark.Name
      * @param region - HistoricLandmark.Region
      * @param historicClass - HistoricLandmark.HistoricClass
      * @return A list of HistoricLandmarks filtered by the parameters that aren't null
      */
-
     @Override
-    public List<HistoricLandmark> filterBy(String text, String region, String historicClass) {
+    @Lob
+    public List<HistoricLandmark> filterBy(String text, String region, String historicClass) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        StringBuilder filter = new StringBuilder();
+        List<Object> params = new ArrayList<>();
+        filter.append("findBy");
 
-        if(historicClass != null) historicClass = historicClass.replace(" ", "_");
-
-        if(text != null && !text.isEmpty() && region != null && !region.isEmpty() && historicClass != null && !historicClass.isEmpty()){
-            return this.historicLandmarkRepository.findByNameContainingAndRegionAndHistoricClassAllIgnoreCase(text, region, historicClass);
-        }else if(text != null && !text.isEmpty() && region != null && !region.isEmpty()){
-            return this.historicLandmarkRepository.findByNameContainingAndRegionAllIgnoreCase(text, region);
-        }else if(text != null && !text.isEmpty() && historicClass != null && !historicClass.isEmpty()){
-            return this.historicLandmarkRepository.findByNameContainingAndHistoricClassAllIgnoreCase(text, historicClass);
-        }else if(region != null && !region.isEmpty() && historicClass != null && !historicClass.isEmpty()){
-            return this.historicLandmarkRepository.findByRegionAndHistoricClassAllIgnoreCase(region, historicClass);
-        } else if(text != null && !text.isEmpty()){
-            return this.historicLandmarkRepository.findByNameContainingIgnoreCase(text);
-        }else if(region != null && !region.isEmpty()){
-            return this.historicLandmarkRepository.findByRegionIgnoreCase(region);
-        }else if(historicClass != null && !historicClass.isEmpty()){
-            return this.historicLandmarkRepository.findByHistoricClassIgnoreCase(historicClass);
-        }else{
-            return this.historicLandmarkRepository.findAll();
+        if (text != null && !text.equals("null") && !text.isEmpty()) {
+            filter.append("NameContaining");
+            params.add(text);
         }
+        if (region != null && !region.equals("null") && !region.isEmpty()) {
+            if (!params.isEmpty()) filter.append("And");
+            filter.append("Region");
+            params.add(region);
+        }
+        if (historicClass != null && !historicClass.equals("null") && !historicClass.isEmpty()) {
+            if (!params.isEmpty()) filter.append("And");
+            filter.append("HistoricClass");
+            params.add(historicClass.replace(" ", "_"));
+        }
+        if (params.isEmpty()) return this.historicLandmarkRepository.findAll();
+        else if (params.size() == 1) filter.append("IgnoreCase");
+        else filter.append("AllIgnoreCase");
+
+        java.lang.reflect.Method method;
+        Class<HistoricLandmarkRepository> repositoryClass = HistoricLandmarkRepository.class;
+
+        method = repositoryClass.getMethod(filter.toString(), params.stream().map(Object::getClass).toArray(Class<?>[]::new));
+        return (List<HistoricLandmark>) method.invoke(this.historicLandmarkRepository, params.toArray());
     }
 
     @Override

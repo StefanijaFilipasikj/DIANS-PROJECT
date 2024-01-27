@@ -1,5 +1,6 @@
 package mk.ukim.finki.landmark_microservice.web;
 
+import jakarta.persistence.Lob;
 import mk.ukim.finki.landmark_microservice.model.HistoricLandmark;
 import mk.ukim.finki.landmark_microservice.model.Review;
 import mk.ukim.finki.landmark_microservice.service.HistoricLandmarkService;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,10 +26,11 @@ public class MapController {
                             @RequestParam(required = false) String region,
                             @RequestParam(required = false) String historicClass){
 
-        List<HistoricLandmark> landmarks = this.historicLandmarkService.filterBy(text, region, historicClass);
-
-        if(landmarks.isEmpty()){
-            landmarks = this.historicLandmarkService.findAllLandmarks();
+        List<HistoricLandmark> landmarks;
+        try{
+            landmarks = this.historicLandmarkService.filterBy(text, region, historicClass);
+        }catch (Exception exception){
+            landmarks = new ArrayList<>();
         }
         return ResponseEntity.ok().body(landmarks);
     }

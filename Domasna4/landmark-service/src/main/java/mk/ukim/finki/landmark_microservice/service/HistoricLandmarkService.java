@@ -3,6 +3,7 @@ package mk.ukim.finki.landmark_microservice.service;
 import mk.ukim.finki.landmark_microservice.model.HistoricLandmark;
 import mk.ukim.finki.landmark_microservice.model.Review;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface HistoricLandmarkService {
@@ -16,7 +17,7 @@ public interface HistoricLandmarkService {
     void deleteLandmarkById(Long id);
     List<HistoricLandmark> findTop10Landmarks();
     HistoricLandmark findRandomLandmark();
-    List<HistoricLandmark> filterBy(String text, String region, String historicClass);
+    List<HistoricLandmark> filterBy(String text, String region, String historicClass) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 
     HistoricLandmark saveReviewToLandmark(Long revId, Long landmarkId);
 
