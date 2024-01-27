@@ -5,12 +5,12 @@
             <input id="textInput" type="text" name="text" class="form-control" placeholder="Search...">
             <label for="regionSelect" class="noDisplay"></label>
             <select id="regionSelect" name="region" class="form-control search-by">
-                <option disabled selected value>Search by city</option>
+                <option disabled selected value="">Search by city</option>
                 <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
             </select>
             <label for="classSelect" class="noDisplay"></label>
             <select id="classSelect" name="historicClass" class="form-control search-by">
-                <option disabled selected value>Search by type</option>
+                <option disabled selected value="">Search by type</option>
                 <option th:each="historicClass : ${historicClasses}" th:value="${historicClass}" th:text="${historicClass}"></option>
             </select>
             <button type="submit" class="fa fa-search btn search-button form-control mr-3"></button>
