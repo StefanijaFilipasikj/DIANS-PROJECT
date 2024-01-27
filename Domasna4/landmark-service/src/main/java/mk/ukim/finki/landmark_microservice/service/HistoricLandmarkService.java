@@ -1,13 +1,10 @@
 package mk.ukim.finki.landmark_microservice.service;
 
 import mk.ukim.finki.landmark_microservice.model.HistoricLandmark;
-import mk.ukim.finki.landmark_microservice.model.Review;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface HistoricLandmarkService {
-    List<HistoricLandmark> findAllLandmarks();
     HistoricLandmark findLandmarkById(Long id);
     List<String> findAllRegions();
     List<String> findAllHistoricClassesRaw();
@@ -18,8 +15,6 @@ public interface HistoricLandmarkService {
     List<HistoricLandmark> findTop10Landmarks();
     HistoricLandmark findRandomLandmark();
     List<HistoricLandmark> filterBy(String text, String region, String historicClass) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
-
     HistoricLandmark saveReviewToLandmark(Long revId, Long landmarkId);
-
     HistoricLandmark deleteReviewFromLandmark(Long revId, Long landmarkId);
 }

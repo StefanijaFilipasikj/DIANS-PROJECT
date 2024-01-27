@@ -10,10 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class CustomUsernamePasswordAuthenticationProvider implements AuthenticationProvider {
-
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 

@@ -18,14 +18,4 @@ public class User{
     private String photoUrl;
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    public User(String username, String password, String name, String surname, String photoUrl, Role role) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.photoUrl = photoUrl;
-        this.role = role;
-    }
-
-    }
+}

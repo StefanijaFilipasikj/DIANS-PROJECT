@@ -256,6 +256,28 @@ footer{
     left: auto;
     right: -50px;
 }
+.carousel a{
+    position: relative;
+}
+.carousel a>span{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.carousel a>span>span{
+    position: absolute;
+    color: #fff;
+    font-size: 3em;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.carousel a:hover span {
+    display: block;
+}
+
 @media (max-width: 1000px){
     .carousel>div{
         height: 30em;

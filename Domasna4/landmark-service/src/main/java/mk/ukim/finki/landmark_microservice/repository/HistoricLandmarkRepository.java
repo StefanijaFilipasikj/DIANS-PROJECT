@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import mk.ukim.finki.landmark_microservice.model.HistoricLandmark;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

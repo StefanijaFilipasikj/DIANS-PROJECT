@@ -4,7 +4,6 @@ import jakarta.annotation.PostConstruct;
 import mk.ukim.finki.landmark_microservice.model.HistoricLandmark;
 import mk.ukim.finki.landmark_microservice.repository.HistoricLandmarkRepository;
 import org.springframework.stereotype.Component;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,7 +27,7 @@ public class DataInitializer {
 
     public void addInitialData(){
         try {
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\sfili\\Documents\\GitHub\\DIANS-PROJECT\\Domasna4\\landmark-service\\src\\main\\resources\\filteredData.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("landmark-service/src/main/resources/filteredData.csv"));
             String line;
             br.readLine(); //skip header
             while ((line = br.readLine())!=null){

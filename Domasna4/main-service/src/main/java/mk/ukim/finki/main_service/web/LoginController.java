@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
     @GetMapping
     public String getLoginPage(Model model, @RequestParam(required = false) String error) {
         if(error != null && !error.isEmpty()){

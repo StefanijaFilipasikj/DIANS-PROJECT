@@ -3,7 +3,6 @@ package mk.ukim.finki.landmark_microservice.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +38,5 @@ public class HistoricLandmark{
 
     public Double getRating(){
         return reviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
-    }
-    public Integer getNumberOfReviews(){
-        return reviews.size();
     }
 }

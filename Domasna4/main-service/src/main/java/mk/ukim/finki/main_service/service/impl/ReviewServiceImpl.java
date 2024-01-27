@@ -11,13 +11,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-
     private final ReviewRepository reviewRepository;
-
     public ReviewServiceImpl(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
 
+    @Override
+    public Review findReviewById(Long id) {
+        return this.reviewRepository.findById(id).orElseThrow(InvalidReviewIdException::new);
+    }
 
     @Override
     @Transactional
@@ -28,6 +30,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
     public void editReviewById(Long id, Double rating, String comment) {
         Review review = this.reviewRepository.findById(id).orElseThrow(InvalidReviewIdException::new);
         review.setComment(comment);
@@ -36,15 +39,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
     public void deleteReviewById(Long id, Long landmarkId) {
-//        HistoricLandmark landmark = this.historicLandmarkRepository.findById(landmarkId).orElseThrow(InvalidLandmarkIdException::new);
-//        landmark.getReviews().removeIf(r -> r.getId().equals(id));
-//        this.historicLandmarkRepository.save(landmark);
         this.reviewRepository.deleteById(id);
-    }
-
-    @Override
-    public Review findReviewById(Long id) {
-        return this.reviewRepository.findById(id).orElseThrow(InvalidReviewIdException::new);
     }
 }

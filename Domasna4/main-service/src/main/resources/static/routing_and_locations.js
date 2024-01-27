@@ -4,6 +4,11 @@ if(document.getElementById('mapPage')){
     let listLandmarks = landmarksData.split("), HistoricLandmark");
     listLandmarks = listLandmarks.map(each => each.concat(")").replace("[","").replace(", HistoricLandmark(",'HistoricLandmark('));
 
+    if(listLandmarks.length <= 3){
+        // Disable route button
+        document.getElementById("route").disabled = true
+    }
+
     // Landmark coordinates
     coordinates = []
     addresses = []

@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -21,20 +20,17 @@ public class WebSecurityConfig {
         this.authProvider = authProvider;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception  {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/h2-console/**").authenticated()
                         .requestMatchers("/map/edit-list", "/map/add-landmark", "/map/add", "/map/add-landmark/**", "/map/delete-landmark/**", "/database/**").hasRole("ADMIN")
                         .requestMatchers("/review/**").hasRole("USER")
-                        .requestMatchers("/**").permitAll()
+                        .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
+                        .loginPage("/login").permitAll()
                         .failureUrl("/login?error=Username%20or%20password%20not%20valid")
                         .defaultSuccessUrl("/", true)
                 )
@@ -44,8 +40,6 @@ public class WebSecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .logoutSuccessUrl("/login")
-                ).exceptionHandling((exception) -> exception
-                        .accessDeniedPage("/")
                 );
         return http.build();
     }

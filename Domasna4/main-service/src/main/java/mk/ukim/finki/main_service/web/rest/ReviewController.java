@@ -1,4 +1,4 @@
-package mk.ukim.finki.main_service.web;
+package mk.ukim.finki.main_service.web.rest;
 
 import jakarta.transaction.Transactional;
 import mk.ukim.finki.main_service.helper.RequestHelper;
@@ -11,18 +11,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-@Controller
-@RequestMapping("/review")
+@RestController
+@RequestMapping("/api/review")
 public class ReviewController {
-
     private final ReviewService reviewService;
     private final UserService userService;
 
@@ -31,16 +28,9 @@ public class ReviewController {
         this.userService = userService;
     }
 
-
-    private Map<String, String> createReviewMap(Review review, HistoricLandmark landmark, String comment, Double rating){
-        Map<String, String> map = new HashMap<>();
-        map.put("comment", comment);
-        map.put("rating", rating.toString());
-        map.put("id", review.getId().toString());
-        map.put("landmarkId", landmark.getId().toString());
-        map.put("avgRating", landmark.getRating().toString());
-        map.put("numReviews", landmark.getNumberOfReviews().toString());
-        return map;
+    @GetMapping("/{id}")
+    public ResponseEntity<Review> getReviewById(@PathVariable Long id){
+        return ResponseEntity.ok().body(this.reviewService.findReviewById(id));
     }
 
     @PostMapping("/add-review/{id}")
@@ -79,6 +69,17 @@ public class ReviewController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    private Map<String, String> createReviewMap(Review review, HistoricLandmark landmark, String comment, Double rating){
+        Map<String, String> map = new HashMap<>();
+        map.put("comment", comment);
+        map.put("rating", rating.toString());
+        map.put("id", review.getId().toString());
+        map.put("landmarkId", landmark.getId().toString());
+        map.put("avgRating", landmark.getRating().toString());
+        map.put("numReviews", landmark.getNumberOfReviews().toString());
+        return map;
     }
 
     @PostMapping("/delete/{id}/{landmarkId}")

@@ -3,11 +3,13 @@
     <h1 class="jumbotron-heading">Visit one of the Top 10 Historic landmarks in North Macedonia</h1>
     <br/>
     <div class="carousel">
-      <div
+      <a
         th:each="landmark : ${top10Landmarks}"
-        th:url="${landmark.getPhotoUrl()}"
-        th:style="'background-image: url(' + ${landmark.getPhotoUrl()} + '); height: 40em; width: 100%; background-size: cover; background-position: center;'"
-      ></div>
+        th:url="${landmark.photoUrl}"
+        th:style="'background-image: url(' + ${landmark.photoUrl} + '); height: 40em; width: 100%; background-size: cover; background-position: center;'"
+        th:href="@{'/map/landmark-details/{id}' (id=${landmark.id})}"
+      ><span><span th:text="${landmark.name}"></span></span>
+      </a>
     </div>
   </div>
   <span class="horizontalLine"></span>

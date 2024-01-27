@@ -3,8 +3,6 @@ package mk.ukim.finki.main_service.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,17 +23,6 @@ public class HistoricLandmark{
     private String photoUrl;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Review> reviews;
-
-    public HistoricLandmark(Double lat, Double lon, String historicClass, String name, String address, String region, String photoUrl) {
-        this.lat = lat;
-        this.lon = lon;
-        this.historicClass = historicClass;
-        this.name = name;
-        this.address = address;
-        this.region = region;
-        this.photoUrl = photoUrl;
-        this.reviews = new ArrayList<>();
-    }
 
     public Double getRating(){
         return reviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);

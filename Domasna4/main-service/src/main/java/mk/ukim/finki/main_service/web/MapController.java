@@ -3,13 +3,11 @@ package mk.ukim.finki.main_service.web;
 import mk.ukim.finki.main_service.helper.RequestHelper;
 import mk.ukim.finki.main_service.model.HistoricLandmark;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
 
 @Controller
@@ -20,6 +18,7 @@ public class MapController {
                           @RequestParam(required = false) String region,
                           @RequestParam(required = false) String historicClass,
                           @RequestParam(required = false) String random,
+                          @RequestParam(required = false) String details,
                           Model model){
 
         Map<String, String> paramsLandmarks = new HashMap<>();
@@ -32,7 +31,12 @@ public class MapController {
             landmarks = Arrays.asList(Objects.requireNonNull(RequestHelper.sendGetRequestForLandmarks(RequestHelper.createRequestUrl("/random-landmark", new HashMap<>())).getBody()));
         }
 
-        //if after filtering, the list is empty, set hasAny to false
+        if(details != null){
+            landmarks = Arrays.asList(Objects.requireNonNull(RequestHelper.sendGetRequestForLandmark(RequestHelper.createRequestUrl("/landmark/" + details, new HashMap<>())).getBody()));
+        }
+
+        //if after filtering, the list is empty, set hasAny to false and get a list of all the landmarks
+        //this is to display 'Nothing matched your search', but have location marks for all landmarks on the map
         if(landmarks.isEmpty()){
             model.addAttribute("hasAny", false);
             landmarks = Arrays.asList(Objects.requireNonNull(RequestHelper.sendGetRequestForLandmarks(RequestHelper.createRequestUrl("/landmarks", new HashMap<>())).getBody()));
@@ -57,6 +61,11 @@ public class MapController {
         return "redirect:/map?random=true";
     }
 
+    @GetMapping("landmark-details/{id}")
+    public String getDetailsForLandmark(@PathVariable Long id){
+        return "redirect:/map?details=" + id;
+    }
+
     @GetMapping("/edit-list")
     public String getEditListPage(@RequestParam(required = false) String error, Model model){
         if (error!=null && !error.isEmpty()){
@@ -78,8 +87,8 @@ public class MapController {
         return "master-template";
     }
 
-    @GetMapping("/add-landmark")
-    public String addLandmarkPage(@RequestParam(required = false) String error, Model model){
+    @GetMapping("/save-landmark")
+    public String getAddLandmarkForm(@RequestParam(required = false) String error, Model model){
         if (error!=null && !error.isEmpty()){
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
@@ -93,8 +102,8 @@ public class MapController {
         return "master-template";
     }
 
-    @GetMapping("/add-landmark/{id}")
-    public String editLandmarkPage(@PathVariable Long id, @RequestParam(required = false) String error, Model model){
+    @GetMapping("/save-landmark/{id}")
+    public String getEditLandmarkForm(@PathVariable Long id, @RequestParam(required = false) String error, Model model){
 
         if (error!=null && !error.isEmpty()){
             model.addAttribute("hasError",true);
@@ -110,8 +119,8 @@ public class MapController {
         return "master-template";
     }
 
-    @PostMapping("/add")
-    public String addLandmark(@RequestParam(required = false) Long landmarkId,
+    @PostMapping("/save-landmark")
+    public String addNewOrEditLandmark(@RequestParam(required = false) Long landmarkId,
                               @RequestParam String name,
                               @RequestParam String landmarkClass,
                               @RequestParam Double lat,
@@ -132,11 +141,11 @@ public class MapController {
         if (landmarkId!=null){
             String message = RequestHelper.sendPostRequestForString(RequestHelper.createRequestUrl("/edit-landmark/" + landmarkId, new HashMap<>()), new HttpEntity<>(params)).getBody();
             if(message == null) return "redirect:/map/edit-list";
-            else return "redirect:/map/add-landmark/" + String.format("%d?error=%s", landmarkId, message);
+            else return "redirect:/map/save-landmark/" + String.format("%d?error=%s", landmarkId, message);
         }else {
             String message = RequestHelper.sendPostRequestForString(RequestHelper.createRequestUrl("/add-new-landmark", new HashMap<>()), new HttpEntity<>(params)).getBody();
             if(message == null) return "redirect:/map/edit-list";
-            else return "redirect:/map/add-landmark?error=" + message;
+            else return "redirect:/map/save-landmark?error=" + message;
         }
     }
 

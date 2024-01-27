@@ -14,16 +14,16 @@
         </thead>
         <tbody>
         <tr th:each="landmark : ${landmarks}">
-          <td th:text="${landmark.getLon()}"></td>
-          <td th:text="${landmark.getLat()}"></td>
-          <td th:text="${landmark.getName()}"></td>
-          <td th:text="${landmark.getHistoricClass()}"></td>
-          <td th:text="${landmark.getRegion()}"></td>
-          <td th:text="${landmark.getAddress()}"></td>
+          <td th:text="${landmark.lon}"></td>
+          <td th:text="${landmark.lat}"></td>
+          <td th:text="${landmark.name}"></td>
+          <td th:text="${landmark.historicClass}"></td>
+          <td th:text="${landmark.region}"></td>
+          <td th:text="${landmark.address}"></td>
           <td>
             <div class="buttons">
-              <a th:href="@{'/map/add-landmark/{id}' (id=${landmark.getId()}) }" class="btn btn-sm btn-success"><i class="fa fa-edit">Edit</i></a>
-              <a th:href="@{'/map/delete-landmark/{id}' (id=${landmark.getId()}) }" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></a>
+              <a th:href="@{'/map/save-landmark/{id}' (id=${landmark.id}) }" class="btn btn-sm btn-success"><i class="fa fa-edit">Edit</i></a>
+              <a th:href="@{'/map/delete-landmark/{id}' (id=${landmark.id}) }" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></a>
             </div>
           </td>
         </tr>
@@ -38,7 +38,7 @@
     <div class="col mb-3">
       <div class="row">
         <div class="col-sm-12 col-md-12">
-          <a href="/map/add-landmark" class="btn btn-block btn-dark">
+          <a href="/map/save-landmark" class="btn btn-block btn-dark">
             Add new historical landmark
           </a>
         </div>

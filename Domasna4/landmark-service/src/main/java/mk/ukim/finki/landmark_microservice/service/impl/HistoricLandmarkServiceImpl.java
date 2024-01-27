@@ -1,17 +1,14 @@
 package mk.ukim.finki.landmark_microservice.service.impl;
 
-
-import jakarta.persistence.Lob;
 import mk.ukim.finki.landmark_microservice.model.HistoricLandmark;
 import mk.ukim.finki.landmark_microservice.model.Review;
 import mk.ukim.finki.landmark_microservice.model.exception.InvalidInputsException;
 import mk.ukim.finki.landmark_microservice.model.exception.InvalidLandmarkIdException;
 import mk.ukim.finki.landmark_microservice.repository.HistoricLandmarkRepository;
 import mk.ukim.finki.landmark_microservice.service.HistoricLandmarkService;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.stereotype.Service;
+import jakarta.persistence.Lob;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.*;
@@ -19,7 +16,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
-
     private final HistoricLandmarkRepository historicLandmarkRepository;
     private final RestTemplate restTemplate;
     private final static Random random = new Random();
@@ -27,12 +23,6 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     public HistoricLandmarkServiceImpl(HistoricLandmarkRepository historicLandmarkRepository, RestTemplate restTemplate) {
         this.historicLandmarkRepository = historicLandmarkRepository;
         this.restTemplate = restTemplate;
-    }
-    @Override
-    public List<HistoricLandmark> findAllLandmarks() {
-        return historicLandmarkRepository.findAll().stream()
-                .sorted(Comparator.comparing(HistoricLandmark::getRating).reversed())
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -48,21 +38,18 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
     @Override
     public List<String> findAllHistoricClassesCapitalizedAndSorted() {
         return historicLandmarkRepository.findAll().stream()
-                .map(HistoricLandmark::getHistoricClass)
-                .distinct()
+                .map(HistoricLandmark::getHistoricClass).distinct()
                 .map(elem -> Arrays.stream(elem.split("_"))
                         .map(part -> part.substring(0, 1).toUpperCase() + part.substring(1))
                         .collect(Collectors.joining(" "))
-                )
-                .sorted()
-                .toList();
+                ).sorted().toList();
     }
 
     @Override
     public List<String> findAllHistoricClassesRaw() {
-        return  this.historicLandmarkRepository.findAll().stream()
-                .map(HistoricLandmark::getHistoricClass)
-                .distinct().toList();
+        return this.historicLandmarkRepository.findAll().stream()
+               .map(HistoricLandmark::getHistoricClass)
+               .distinct().toList();
     }
 
     @Override
@@ -83,6 +70,7 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
         landmark.setAddress(address);
         landmark.setRegion(region);
         landmark.setPhotoUrl(photoUrl);
+
         this.historicLandmarkRepository.save(landmark);
     }
 
@@ -95,7 +83,6 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
                 invalidUrl = true;
             }
         }
-
         List<String> errors = new ArrayList<>();
         if(lon < -180.0 || lon > 180.0) errors.add("Longitude must be between -180 and 180");
         if(lat < -90.0 || lat > 90.0) errors.add("Latitude must be between -90 and 90");
@@ -162,6 +149,12 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
         return (List<HistoricLandmark>) method.invoke(this.historicLandmarkRepository, params.toArray());
     }
 
+    /**
+     * A method that adds a review to a landmark or edits a review and saves the changes in the landmark
+     * @param revId - Review.id
+     * @param landmarkId - HistoricLandmark.id
+     * @return HistoricLandmark - the landmark that the review was written for
+     */
     @Override
     public HistoricLandmark saveReviewToLandmark(Long revId, Long landmarkId) {
         Review review = restTemplate.getForEntity("http://localhost:8080/api/review/"+revId, Review.class).getBody();

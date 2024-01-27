@@ -105,7 +105,7 @@ function createCommentElement(review) {
 // Function to create an edit form element
 function createEditForm(review){
     let form = document.createElement("form");
-    form.setAttribute("action", "/review/edit/" + review.id + "/" + review.landmarkId);
+    form.setAttribute("action", "/api/review/edit/" + review.id + "/" + review.landmarkId);
     form.setAttribute("method", "post");
     form.setAttribute("data-review-id", review.id);
     form.setAttribute("data-landmark-id", review.landmarkId);
@@ -187,7 +187,7 @@ function deleteReview(event) {
     const button = event.target;
     const reviewId = button.getAttribute("data-review-id");
     const landmarkId = button.getAttribute("data-landmark-id");
-    fetch(`/review/delete/${reviewId}/${landmarkId}`, {
+    fetch(`/api/review/delete/${reviewId}/${landmarkId}`, {
         method: 'POST',
     })
         .then(response => {
