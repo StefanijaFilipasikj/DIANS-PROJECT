@@ -7,4 +7,4 @@
 - (https://hub.docker.com/r/dejanristovski/main-service)
 - (https://hub.docker.com/r/dejanristovski/landmark-service)
 # Линк до хостирана апликација
-- (https://timeless-travel-microservices.azurewebsites.net/)
+- (https://timeless-travel-microservice.azurewebsites.net)
