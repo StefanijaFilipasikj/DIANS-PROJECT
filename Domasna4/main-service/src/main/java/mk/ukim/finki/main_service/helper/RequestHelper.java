@@ -11,7 +11,10 @@ import java.util.stream.Collectors;
 
 @Component
 public class RequestHelper {
+    //Switch url if using docker
+
     private static String rootUrl = "http://localhost:8081/api";
+//    private static String rootUrl = "http://landmark-service:8081/api";
     private static RestTemplate restTemplate;
 
     private RequestHelper(RestTemplate restTemplate) {

@@ -34,7 +34,7 @@ public class RegisterController {
                            @RequestParam String repeatedPassword,
                            @RequestParam String name,
                            @RequestParam String surname,
-                           @RequestParam String photoUrl) {
+                           @RequestParam(required = false) String photoUrl) {
         try{
             this.userService.register(username, password, repeatedPassword, name, surname, photoUrl, Role.ROLE_USER);
             return "redirect:/login";

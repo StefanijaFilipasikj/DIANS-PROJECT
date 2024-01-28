@@ -43,10 +43,12 @@ public class UserServiceImpl implements UserService {
             throw new PasswordsDoNotMatchException();
         }
 
-        try{
-            URI.create(photoUrl).toURL();
-        }catch (Exception exception){
-            throw new InvalidInputsException("Invalid Photo URL");
+        if(photoUrl != null && !photoUrl.isEmpty()){
+            try{
+                URI.create(photoUrl).toURL();
+            }catch (Exception exception){
+                throw new InvalidInputsException("Invalid Photo URL");
+            }
         }
 
         userRepository.save(new User(username, passwordEncoder.encode(password), name, surname, photoUrl, role));

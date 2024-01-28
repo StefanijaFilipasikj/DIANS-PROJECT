@@ -1,0 +1,54 @@
+
+#If running with docker, switch code in files: HistoricLandmarkServiceImpl.java, DataInitializer.java, RequestHelper.java
+
+version: '3.8'
+
+services:
+  landmark-service:
+    build: ./landmark-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgresql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=wp123
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/landmarks
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=wp123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    networks:
+      - main-network
+
+  main-service:
+    build: ./main-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql
+      - landmark-service
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=wp123
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/landmarks
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=wp123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    networks:
+      - main-network
+
+  postgresql:
+    image: postgres
+    container_name: postgresql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=wp123
+      - POSTGRES_DB=landmarks
+    ports:
+      - "5431:5432"
+    networks:
+      - main-network
+
+
+networks:
+  main-network:

@@ -27,6 +27,8 @@ public class DataInitializer {
 
     public void addInitialData(){
         try {
+            //Switch path if using docker
+//            BufferedReader br = new BufferedReader(new FileReader("filteredData.csv"));
             BufferedReader br = new BufferedReader(new FileReader("landmark-service/src/main/resources/filteredData.csv"));
             String line;
             br.readLine(); //skip header

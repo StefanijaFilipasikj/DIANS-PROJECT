@@ -16,6 +16,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
+    //Switch url if using docker
+
+    private static String mainUrl = "http://localhost:8080";
+//    private static String mainUrl = "http://main-service:8080";
     private final HistoricLandmarkRepository historicLandmarkRepository;
     private final RestTemplate restTemplate;
     private final static Random random = new Random();
@@ -157,7 +161,7 @@ public class HistoricLandmarkServiceImpl implements HistoricLandmarkService {
      */
     @Override
     public HistoricLandmark saveReviewToLandmark(Long revId, Long landmarkId) {
-        Review review = restTemplate.getForEntity("http://localhost:8080/api/review/"+revId, Review.class).getBody();
+        Review review = restTemplate.getForEntity(mainUrl + "/api/review/"+revId, Review.class).getBody();
         HistoricLandmark landmark = historicLandmarkRepository.findById(landmarkId).orElseThrow(InvalidLandmarkIdException::new);
 
         if(landmark.getReviews().contains(review)){
